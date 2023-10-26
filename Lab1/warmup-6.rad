@@ -1,0 +1,12 @@
+; Memoria
+org 128
+xx: db
+y: db
+
+; Codigo
+org 0
+ldr a xx
+sub a y
+jn fim
+str a xx
+fim: hlt
