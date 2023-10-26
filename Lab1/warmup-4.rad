@@ -1,0 +1,13 @@
+; Memória
+org 128
+j: db
+k: db
+
+; Código
+org 0
+ldr a k
+and a #h20
+jz fim
+ldr a k
+str a j
+fim: hlt
