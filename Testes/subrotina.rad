@@ -1,0 +1,31 @@
+org h80
+x1: db
+x2: db
+y1: db
+y2: db
+end_res: db
+aux: db
+
+org 0
+ldr a x1
+ldr b x2
+
+ldr x #y1
+str x end_res
+
+jsr soma_ab ; Soma x1 e x2
+
+ldr x #y2
+str x end_res
+
+jsr soma_ab ; Soma y1 e x2 (x1 + 2*x2)
+ldr a y2
+hlt
+
+
+
+soma_ab: nop
+str b aux
+add a aux
+str a end_res, i
+jmp soma_ab, i

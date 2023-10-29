@@ -1,0 +1,19 @@
+org 220
+matriz: dab [9]
+x1: db
+x2: db
+x3: db
+org hf0
+det_l: db
+det_h: db
+
+org 0
+
+
+
+; Função para multiplicar os três valores de uma diagonal
+diagonal: nop
+
+; Função multiplicação
+
+; Função soma
