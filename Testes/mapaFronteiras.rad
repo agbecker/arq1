@@ -1,0 +1,18 @@
+org h80
+celula: db
+fronteiras: dab [8]
+offsets: dab -6, -5, -4, -1, 1, 4, 5, 6
+
+org 0
+ldr x #0
+ldr b #8
+
+loop:
+ldr a celula
+add a offsets, x
+str a fronteiras, x
+add x #1
+sub b #1
+jz fim
+jmp loop
+fim: hlt

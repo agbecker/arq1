@@ -1,0 +1,27 @@
+org h80
+linha: db
+coluna: db
+
+org 220
+matriz: dab [9]
+mult: dab [3]
+
+org hf0
+det_l: db
+det_h: db
+
+
+org 0
+ldr a #0
+
+
+; Seleciona diagonal positiva
+; Considera que A tem o índice da coluna do primeiro termo da diagonal [0, 1, 2]
+seleciona_diagonal: nop
+ldr x #0
+
+
+
+aumenta: nop
+add a #3
+jmp aumenta, i
