@@ -1,0 +1,73 @@
+; Álvaro Guglielmin Becker
+; 00301391
+
+; Algoritmo básico:
+; while(true):
+;    while(início do jogo):
+;        mensagem de início
+;        if(jogador digita) : break
+;    insere palavra a adivinhar
+;    while(palavra não adivinhada AND vidas > 0):
+;        lê letra
+;        if(letra existe) : revela na palavra
+;        else : vidas -= 1
+;    mensagem de final
+;    inicio do jogo = true
+
+; Constantes
+visor_ini: equ hFFDB
+visor_end: equ hFFFE
+string_end: equ hFFF6
+vidas_ini: equ hFFF7
+
+teclado_on: equ hFFDA
+teclado_input: equ  hFFDB
+
+timer_set: equ hFFD7
+interrupt: hFFD8
+
+; Memória
+org h8000
+num_vidas: dw
+string: dab [26]
+
+return_str_len: dw
+mensagem_ini: dab 'Jogo da forca! Digite sua palavra:', 0
+mensagem_ini_write: equ mensagem_ini-2
+
+
+; Main
+org 0
+jsr r7, display_inicial
+hlt
+
+
+; Funcoes
+str_len: ; Armazena na variável return_str_len o tamanho de uma string
+             ; Recebe início da string em R1
+             ; !! Altera R1, R2, R3 !!
+
+clr r2 ; R2 armazena o tamanho da string
+loop_str_len:
+mov (r1), r3
+and #h00FF, r3
+cmp r3, #0 ; Verifica se é o final da string
+beq fim_str_len
+inc r1
+inc r2
+br loop_str_len
+
+fim_str_len:
+mov r2, return_str_len
+rts r7
+
+display_inicial: ; Escreve a mensagem de início no visor
+                        ; !! Altera R1 !!
+mov #mensagem_ini-1, r1
+jsr r7, str_len
+mov return_str_len, r1
+
+escreve_inicial:
+mov mensagem_ini_write(r1), visor_ini(r1)
+sob r1, escreve_inicial
+rts r7
