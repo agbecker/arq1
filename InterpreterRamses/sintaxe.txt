@@ -1,0 +1,30 @@
+Regras gerais de sintaxe:
+
+Cada comando deve terminar em ;
+Comentários são introduzidos com //
+Números em hexadecimal são introduzidos com h (Ex.: h7A)
+Se o endereço das variáveis não for declarado, elas serão declaradas nos últimos endereços disponíveis da memória
+
+---------------------------
+Declaração de variável:
+var <nome>;                     (Inicializa como 0)
+var <nome> = <valor>;
+var <nome> @ <end>;             (Posiciona a variável em endereço específico da memória)
+var <nome> = <valor> @ <end>;
+
+Exemplos:
+var x;
+var y = 12;
+var z = -5 @ h80;
+
+--------------------------
+Declaração de array:
+var <nome>[<tam>];
+var <nome>[] = {<e1>, <e2>, ...};
+
+Exemplos:
+var vetor[15] @ 128;            (Posiciona o primeiro elemento no endereço informado)
+var lista[] = {0, -1, 'a', hB};
+
+----------------------------
+Ponteiros:

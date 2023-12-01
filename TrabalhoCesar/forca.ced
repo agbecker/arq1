@@ -1,0 +1,15 @@
+tecst: equ hffda
+tecdt: equ hffdb
+visor: equ hffdc
+
+org 0
+clr r1
+
+main_loop:
+mov tecst r0
+cmp r0 #h80
+bne main_loop
+mov tecdt visor(r1)
+clr tecst
+inc r1
+jmp main_loop

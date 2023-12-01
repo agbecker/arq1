@@ -3,17 +3,50 @@ matriz: dab [9]
 x1: db
 x2: db
 x3: db
+
 org hf0
 det_l: db
 det_h: db
+s1: db
+s2:db
+soma_l: db
+soma_h: db
+mult_l: db
+mult_h: db
 
 org 0
-
+ldr a #4
+jsr resto3
+hlt
 
 
 ; Função para multiplicar os três valores de uma diagonal
 diagonal: nop
 
 ; Função multiplicação
+; Multiplica A por B, armazena o resultado em mult_l e mult_h
+multiplica: nop
+
 
 ; Função soma
+; Soma os valores em s1 e s2, armazena em soma_l e soma_h
+soma: nop
+ldr b #1
+ldr a s1
+add a s2
+jc prox_soma
+sub b #1
+prox_soma: str a soma_l
+str b soma_h
+jmp soma, i
+
+
+; Função resto
+; Modifica o valor em A para estar em [0,2]
+resto3: nop
+neg a
+add a #3
+jn retorna_resto3
+sub a #3
+retorna_resto3: neg a
+jmp resto3, i

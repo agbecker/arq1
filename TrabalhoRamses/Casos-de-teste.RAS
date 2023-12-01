@@ -1,0 +1,1910 @@
+TESTES RANDOMICOS - github: @marcelobasso
+Casos de teste - 2023-2
+Teste numero 1
+Teste 1
+End.192 recebe 206
+End.193 recebe 223
+End.194 recebe 23
+End.195 recebe 1
+End.206 recebe 87
+End.207 recebe 65
+End.208 recebe 79
+End.209 recebe 68
+End.210 recebe 90
+End.211 recebe 70
+End.212 recebe 81
+End.213 recebe 75
+End.214 recebe 71
+End.215 recebe 67
+End.216 recebe 86
+End.217 recebe 82
+End.218 recebe 0
+End.223 deve receber 90
+End.224 deve receber 68
+End.225 deve receber 82
+End.226 deve receber 71
+End.227 deve receber 67
+End.228 deve receber 73
+End.229 deve receber 84
+End.230 deve receber 78
+End.231 deve receber 74
+End.232 deve receber 70
+End.233 deve receber 89
+End.234 deve receber 85
+End.235 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 2
+Teste 2
+End.192 recebe 214
+End.193 recebe 236
+End.194 recebe 1
+End.195 recebe 1
+End.214 recebe 68
+End.215 recebe 71
+End.216 recebe 70
+End.217 recebe 71
+End.218 recebe 67
+End.219 recebe 66
+End.220 recebe 90
+End.221 recebe 68
+End.222 recebe 71
+End.223 recebe 79
+End.224 recebe 67
+End.225 recebe 72
+End.226 recebe 79
+End.227 recebe 88
+End.228 recebe 75
+End.229 recebe 81
+End.230 recebe 87
+End.231 recebe 74
+End.232 recebe 0
+End.236 deve receber 67
+End.237 deve receber 70
+End.238 deve receber 69
+End.239 deve receber 70
+End.240 deve receber 66
+End.241 deve receber 65
+End.242 deve receber 89
+End.243 deve receber 67
+End.244 deve receber 70
+End.245 deve receber 78
+End.246 deve receber 66
+End.247 deve receber 71
+End.248 deve receber 78
+End.249 deve receber 87
+End.250 deve receber 74
+End.251 deve receber 80
+End.252 deve receber 86
+End.253 deve receber 73
+End.254 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 3
+Teste 3
+End.192 recebe 197
+End.193 recebe 232
+End.194 recebe 13
+End.195 recebe 0
+End.197 recebe 68
+End.198 recebe 89
+End.199 recebe 69
+End.200 recebe 65
+End.201 recebe 82
+End.202 recebe 80
+End.203 recebe 87
+End.204 recebe 0
+End.232 deve receber 81
+End.233 deve receber 76
+End.234 deve receber 82
+End.235 deve receber 78
+End.236 deve receber 69
+End.237 deve receber 67
+End.238 deve receber 74
+End.239 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 4
+Teste 4
+End.192 recebe 218
+End.193 recebe 236
+End.194 recebe 18
+End.195 recebe 1
+End.218 recebe 73
+End.219 recebe 76
+End.220 recebe 72
+End.221 recebe 66
+End.222 recebe 82
+End.223 recebe 90
+End.224 recebe 89
+End.225 recebe 81
+End.226 recebe 69
+End.227 recebe 85
+End.228 recebe 65
+End.229 recebe 82
+End.230 recebe 84
+End.231 recebe 70
+End.232 recebe 68
+End.233 recebe 0
+End.236 deve receber 81
+End.237 deve receber 84
+End.238 deve receber 80
+End.239 deve receber 74
+End.240 deve receber 90
+End.241 deve receber 72
+End.242 deve receber 71
+End.243 deve receber 89
+End.244 deve receber 77
+End.245 deve receber 67
+End.246 deve receber 73
+End.247 deve receber 90
+End.248 deve receber 66
+End.249 deve receber 78
+End.250 deve receber 76
+End.251 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 5
+Teste 5
+End.192 recebe 214
+End.193 recebe 232
+End.194 recebe 4
+End.195 recebe 1
+End.214 recebe 74
+End.215 recebe 75
+End.216 recebe 73
+End.217 recebe 82
+End.218 recebe 75
+End.219 recebe 73
+End.220 recebe 83
+End.221 recebe 66
+End.222 recebe 82
+End.223 recebe 73
+End.224 recebe 87
+End.225 recebe 85
+End.226 recebe 69
+End.227 recebe 90
+End.228 recebe 74
+End.229 recebe 79
+End.230 recebe 0
+End.232 deve receber 70
+End.233 deve receber 71
+End.234 deve receber 69
+End.235 deve receber 78
+End.236 deve receber 71
+End.237 deve receber 69
+End.238 deve receber 79
+End.239 deve receber 88
+End.240 deve receber 78
+End.241 deve receber 69
+End.242 deve receber 83
+End.243 deve receber 81
+End.244 deve receber 65
+End.245 deve receber 86
+End.246 deve receber 70
+End.247 deve receber 75
+End.248 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 6
+Teste 6
+End.192 recebe 219
+End.193 recebe 240
+End.194 recebe 25
+End.195 recebe 1
+End.219 recebe 68
+End.220 recebe 72
+End.221 recebe 90
+End.222 recebe 72
+End.223 recebe 72
+End.224 recebe 71
+End.225 recebe 74
+End.226 recebe 78
+End.227 recebe 68
+End.228 recebe 0
+End.240 deve receber 69
+End.241 deve receber 73
+End.242 deve receber 65
+End.243 deve receber 73
+End.244 deve receber 73
+End.245 deve receber 72
+End.246 deve receber 75
+End.247 deve receber 79
+End.248 deve receber 69
+End.249 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 7
+Teste 7
+End.192 recebe 226
+End.193 recebe 237
+End.194 recebe 12
+End.195 recebe 0
+End.226 recebe 67
+End.227 recebe 90
+End.228 recebe 88
+End.229 recebe 0
+End.237 deve receber 79
+End.238 deve receber 76
+End.239 deve receber 74
+End.240 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 8
+Teste 8
+End.192 recebe 199
+End.193 recebe 227
+End.194 recebe 9
+End.195 recebe 0
+End.199 recebe 70
+End.200 recebe 77
+End.201 recebe 80
+End.202 recebe 82
+End.203 recebe 65
+End.204 recebe 83
+End.205 recebe 67
+End.206 recebe 65
+End.207 recebe 86
+End.208 recebe 65
+End.209 recebe 76
+End.210 recebe 82
+End.211 recebe 74
+End.212 recebe 75
+End.213 recebe 89
+End.214 recebe 70
+End.215 recebe 0
+End.227 deve receber 79
+End.228 deve receber 86
+End.229 deve receber 89
+End.230 deve receber 65
+End.231 deve receber 74
+End.232 deve receber 66
+End.233 deve receber 76
+End.234 deve receber 74
+End.235 deve receber 69
+End.236 deve receber 74
+End.237 deve receber 85
+End.238 deve receber 65
+End.239 deve receber 83
+End.240 deve receber 84
+End.241 deve receber 72
+End.242 deve receber 79
+End.243 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 9
+Teste 9
+End.192 recebe 227
+End.193 recebe 240
+End.194 recebe 3
+End.195 recebe 1
+End.227 recebe 81
+End.228 recebe 70
+End.229 recebe 73
+End.230 recebe 85
+End.231 recebe 75
+End.232 recebe 82
+End.233 recebe 76
+End.234 recebe 71
+End.235 recebe 78
+End.236 recebe 82
+End.237 recebe 73
+End.238 recebe 0
+End.240 deve receber 78
+End.241 deve receber 67
+End.242 deve receber 70
+End.243 deve receber 82
+End.244 deve receber 72
+End.245 deve receber 79
+End.246 deve receber 73
+End.247 deve receber 68
+End.248 deve receber 75
+End.249 deve receber 79
+End.250 deve receber 70
+End.251 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 10
+Teste 10
+End.192 recebe 202
+End.193 recebe 232
+End.194 recebe 3
+End.195 recebe 1
+End.202 recebe 84
+End.203 recebe 75
+End.204 recebe 72
+End.205 recebe 72
+End.206 recebe 78
+End.207 recebe 66
+End.208 recebe 79
+End.209 recebe 69
+End.210 recebe 75
+End.211 recebe 86
+End.212 recebe 65
+End.213 recebe 84
+End.214 recebe 83
+End.215 recebe 85
+End.216 recebe 73
+End.217 recebe 86
+End.218 recebe 75
+End.219 recebe 75
+End.220 recebe 71
+End.221 recebe 70
+End.222 recebe 0
+End.232 deve receber 81
+End.233 deve receber 72
+End.234 deve receber 69
+End.235 deve receber 69
+End.236 deve receber 75
+End.237 deve receber 89
+End.238 deve receber 76
+End.239 deve receber 66
+End.240 deve receber 72
+End.241 deve receber 83
+End.242 deve receber 88
+End.243 deve receber 81
+End.244 deve receber 80
+End.245 deve receber 82
+End.246 deve receber 70
+End.247 deve receber 83
+End.248 deve receber 72
+End.249 deve receber 72
+End.250 deve receber 68
+End.251 deve receber 67
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 11
+Teste 11
+End.192 recebe 210
+End.193 recebe 217
+End.194 recebe 13
+End.195 recebe 0
+End.210 recebe 74
+End.211 recebe 90
+End.212 recebe 76
+End.213 recebe 86
+End.214 recebe 77
+End.215 recebe 69
+End.216 recebe 0
+End.217 deve receber 87
+End.218 deve receber 77
+End.219 deve receber 89
+End.220 deve receber 73
+End.221 deve receber 90
+End.222 deve receber 82
+End.223 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 12
+Teste 12
+End.192 recebe 204
+End.193 recebe 230
+End.194 recebe 9
+End.195 recebe 0
+End.204 recebe 78
+End.205 recebe 84
+End.206 recebe 67
+End.207 recebe 75
+End.208 recebe 87
+End.209 recebe 66
+End.210 recebe 72
+End.211 recebe 81
+End.212 recebe 87
+End.213 recebe 78
+End.214 recebe 0
+End.230 deve receber 87
+End.231 deve receber 67
+End.232 deve receber 76
+End.233 deve receber 84
+End.234 deve receber 70
+End.235 deve receber 75
+End.236 deve receber 81
+End.237 deve receber 90
+End.238 deve receber 70
+End.239 deve receber 87
+End.240 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 13
+Teste 13
+End.192 recebe 205
+End.193 recebe 230
+End.194 recebe 23
+End.195 recebe 1
+End.205 recebe 87
+End.206 recebe 80
+End.207 recebe 74
+End.208 recebe 65
+End.209 recebe 78
+End.210 recebe 81
+End.211 recebe 83
+End.212 recebe 79
+End.213 recebe 82
+End.214 recebe 75
+End.215 recebe 74
+End.216 recebe 83
+End.217 recebe 66
+End.218 recebe 70
+End.219 recebe 80
+End.220 recebe 75
+End.221 recebe 69
+End.222 recebe 79
+End.223 recebe 72
+End.224 recebe 75
+End.225 recebe 83
+End.226 recebe 88
+End.227 recebe 67
+End.228 recebe 66
+End.229 recebe 0
+End.230 deve receber 90
+End.231 deve receber 83
+End.232 deve receber 77
+End.233 deve receber 68
+End.234 deve receber 81
+End.235 deve receber 84
+End.236 deve receber 86
+End.237 deve receber 82
+End.238 deve receber 85
+End.239 deve receber 78
+End.240 deve receber 77
+End.241 deve receber 86
+End.242 deve receber 69
+End.243 deve receber 73
+End.244 deve receber 83
+End.245 deve receber 78
+End.246 deve receber 72
+End.247 deve receber 82
+End.248 deve receber 75
+End.249 deve receber 78
+End.250 deve receber 86
+End.251 deve receber 65
+End.252 deve receber 70
+End.253 deve receber 69
+End.254 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 14
+Teste 14
+End.192 recebe 200
+End.193 recebe 225
+End.194 recebe 10
+End.195 recebe 1
+End.200 recebe 77
+End.201 recebe 68
+End.202 recebe 88
+End.203 recebe 87
+End.204 recebe 82
+End.205 recebe 83
+End.206 recebe 77
+End.207 recebe 86
+End.208 recebe 87
+End.209 recebe 67
+End.210 recebe 80
+End.211 recebe 82
+End.212 recebe 89
+End.213 recebe 73
+End.214 recebe 73
+End.215 recebe 72
+End.216 recebe 75
+End.217 recebe 88
+End.218 recebe 77
+End.219 recebe 87
+End.220 recebe 87
+End.221 recebe 68
+End.222 recebe 80
+End.223 recebe 69
+End.224 recebe 0
+End.225 deve receber 67
+End.226 deve receber 84
+End.227 deve receber 78
+End.228 deve receber 77
+End.229 deve receber 72
+End.230 deve receber 73
+End.231 deve receber 67
+End.232 deve receber 76
+End.233 deve receber 77
+End.234 deve receber 83
+End.235 deve receber 70
+End.236 deve receber 72
+End.237 deve receber 79
+End.238 deve receber 89
+End.239 deve receber 89
+End.240 deve receber 88
+End.241 deve receber 65
+End.242 deve receber 78
+End.243 deve receber 67
+End.244 deve receber 77
+End.245 deve receber 77
+End.246 deve receber 84
+End.247 deve receber 70
+End.248 deve receber 85
+End.249 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 15
+Teste 15
+End.192 recebe 207
+End.193 recebe 239
+End.194 recebe 3
+End.195 recebe 1
+End.207 recebe 86
+End.208 recebe 90
+End.209 recebe 65
+End.210 recebe 65
+End.211 recebe 86
+End.212 recebe 80
+End.213 recebe 77
+End.214 recebe 76
+End.215 recebe 69
+End.216 recebe 67
+End.217 recebe 80
+End.218 recebe 72
+End.219 recebe 86
+End.220 recebe 0
+End.239 deve receber 83
+End.240 deve receber 87
+End.241 deve receber 88
+End.242 deve receber 88
+End.243 deve receber 83
+End.244 deve receber 77
+End.245 deve receber 74
+End.246 deve receber 73
+End.247 deve receber 66
+End.248 deve receber 90
+End.249 deve receber 77
+End.250 deve receber 69
+End.251 deve receber 83
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 16
+Teste 16
+End.192 recebe 218
+End.193 recebe 236
+End.194 recebe 21
+End.195 recebe 0
+End.218 recebe 76
+End.219 recebe 89
+End.220 recebe 72
+End.221 recebe 69
+End.222 recebe 87
+End.223 recebe 66
+End.224 recebe 74
+End.225 recebe 72
+End.226 recebe 77
+End.227 recebe 66
+End.228 recebe 74
+End.229 recebe 75
+End.230 recebe 67
+End.231 recebe 89
+End.232 recebe 78
+End.233 recebe 83
+End.234 recebe 0
+End.236 deve receber 71
+End.237 deve receber 84
+End.238 deve receber 67
+End.239 deve receber 90
+End.240 deve receber 82
+End.241 deve receber 87
+End.242 deve receber 69
+End.243 deve receber 67
+End.244 deve receber 72
+End.245 deve receber 87
+End.246 deve receber 69
+End.247 deve receber 70
+End.248 deve receber 88
+End.249 deve receber 84
+End.250 deve receber 73
+End.251 deve receber 78
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 17
+Teste 17
+End.192 recebe 226
+End.193 recebe 245
+End.194 recebe 10
+End.195 recebe 0
+End.226 recebe 80
+End.227 recebe 74
+End.228 recebe 74
+End.229 recebe 70
+End.230 recebe 87
+End.231 recebe 86
+End.232 recebe 66
+End.233 recebe 88
+End.234 recebe 0
+End.245 deve receber 90
+End.246 deve receber 84
+End.247 deve receber 84
+End.248 deve receber 80
+End.249 deve receber 71
+End.250 deve receber 70
+End.251 deve receber 76
+End.252 deve receber 72
+End.253 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 18
+Teste 18
+End.192 recebe 200
+End.193 recebe 228
+End.194 recebe 23
+End.195 recebe 0
+End.200 recebe 75
+End.201 recebe 90
+End.202 recebe 66
+End.203 recebe 84
+End.204 recebe 70
+End.205 recebe 66
+End.206 recebe 74
+End.207 recebe 73
+End.208 recebe 81
+End.209 recebe 71
+End.210 recebe 88
+End.211 recebe 66
+End.212 recebe 84
+End.213 recebe 80
+End.214 recebe 73
+End.215 recebe 81
+End.216 recebe 84
+End.217 recebe 66
+End.218 recebe 67
+End.219 recebe 67
+End.220 recebe 90
+End.221 recebe 68
+End.222 recebe 79
+End.223 recebe 71
+End.224 recebe 0
+End.228 deve receber 72
+End.229 deve receber 87
+End.230 deve receber 89
+End.231 deve receber 81
+End.232 deve receber 67
+End.233 deve receber 89
+End.234 deve receber 71
+End.235 deve receber 70
+End.236 deve receber 78
+End.237 deve receber 68
+End.238 deve receber 85
+End.239 deve receber 89
+End.240 deve receber 81
+End.241 deve receber 77
+End.242 deve receber 70
+End.243 deve receber 78
+End.244 deve receber 81
+End.245 deve receber 89
+End.246 deve receber 90
+End.247 deve receber 90
+End.248 deve receber 87
+End.249 deve receber 65
+End.250 deve receber 76
+End.251 deve receber 68
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 19
+Teste 19
+End.192 recebe 205
+End.193 recebe 229
+End.194 recebe 16
+End.195 recebe 0
+End.205 recebe 72
+End.206 recebe 80
+End.207 recebe 69
+End.208 recebe 86
+End.209 recebe 77
+End.210 recebe 90
+End.211 recebe 69
+End.212 recebe 88
+End.213 recebe 80
+End.214 recebe 87
+End.215 recebe 65
+End.216 recebe 84
+End.217 recebe 74
+End.218 recebe 87
+End.219 recebe 70
+End.220 recebe 73
+End.221 recebe 77
+End.222 recebe 76
+End.223 recebe 74
+End.224 recebe 76
+End.225 recebe 0
+End.229 deve receber 88
+End.230 deve receber 70
+End.231 deve receber 85
+End.232 deve receber 76
+End.233 deve receber 67
+End.234 deve receber 80
+End.235 deve receber 85
+End.236 deve receber 78
+End.237 deve receber 70
+End.238 deve receber 77
+End.239 deve receber 81
+End.240 deve receber 74
+End.241 deve receber 90
+End.242 deve receber 77
+End.243 deve receber 86
+End.244 deve receber 89
+End.245 deve receber 67
+End.246 deve receber 66
+End.247 deve receber 90
+End.248 deve receber 66
+End.249 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 20
+Teste 20
+End.192 recebe 214
+End.193 recebe 244
+End.194 recebe 23
+End.195 recebe 0
+End.214 recebe 87
+End.215 recebe 84
+End.216 recebe 0
+End.244 deve receber 84
+End.245 deve receber 81
+End.246 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 21
+Teste 21
+End.192 recebe 208
+End.193 recebe 227
+End.194 recebe 23
+End.195 recebe 0
+End.208 recebe 87
+End.209 recebe 86
+End.210 recebe 88
+End.211 recebe 84
+End.212 recebe 79
+End.213 recebe 73
+End.214 recebe 78
+End.215 recebe 69
+End.216 recebe 77
+End.217 recebe 87
+End.218 recebe 80
+End.219 recebe 71
+End.220 recebe 79
+End.221 recebe 83
+End.222 recebe 71
+End.223 recebe 82
+End.224 recebe 71
+End.225 recebe 0
+End.227 deve receber 84
+End.228 deve receber 83
+End.229 deve receber 85
+End.230 deve receber 81
+End.231 deve receber 76
+End.232 deve receber 70
+End.233 deve receber 75
+End.234 deve receber 66
+End.235 deve receber 74
+End.236 deve receber 84
+End.237 deve receber 77
+End.238 deve receber 68
+End.239 deve receber 76
+End.240 deve receber 80
+End.241 deve receber 68
+End.242 deve receber 79
+End.243 deve receber 68
+End.244 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 22
+Teste 22
+End.192 recebe 234
+End.193 recebe 245
+End.194 recebe 6
+End.195 recebe 1
+End.234 recebe 87
+End.235 recebe 69
+End.236 recebe 73
+End.237 recebe 74
+End.238 recebe 71
+End.239 recebe 85
+End.240 recebe 86
+End.241 recebe 79
+End.242 recebe 68
+End.243 recebe 0
+End.245 deve receber 81
+End.246 deve receber 89
+End.247 deve receber 67
+End.248 deve receber 68
+End.249 deve receber 65
+End.250 deve receber 79
+End.251 deve receber 80
+End.252 deve receber 73
+End.253 deve receber 88
+End.254 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 23
+Teste 23
+End.192 recebe 208
+End.193 recebe 224
+End.194 recebe 7
+End.195 recebe 1
+End.208 recebe 87
+End.209 recebe 90
+End.210 recebe 80
+End.211 recebe 74
+End.212 recebe 65
+End.213 recebe 88
+End.214 recebe 78
+End.215 recebe 77
+End.216 recebe 67
+End.217 recebe 69
+End.218 recebe 82
+End.219 recebe 78
+End.220 recebe 0
+End.224 deve receber 80
+End.225 deve receber 83
+End.226 deve receber 73
+End.227 deve receber 67
+End.228 deve receber 84
+End.229 deve receber 81
+End.230 deve receber 71
+End.231 deve receber 70
+End.232 deve receber 86
+End.233 deve receber 88
+End.234 deve receber 75
+End.235 deve receber 71
+End.236 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 24
+Teste 24
+End.192 recebe 208
+End.193 recebe 226
+End.194 recebe 16
+End.195 recebe 1
+End.208 recebe 89
+End.209 recebe 81
+End.210 recebe 88
+End.211 recebe 85
+End.212 recebe 89
+End.213 recebe 82
+End.214 recebe 76
+End.215 recebe 85
+End.216 recebe 88
+End.217 recebe 70
+End.218 recebe 84
+End.219 recebe 82
+End.220 recebe 78
+End.221 recebe 73
+End.222 recebe 77
+End.223 recebe 90
+End.224 recebe 0
+End.226 deve receber 73
+End.227 deve receber 65
+End.228 deve receber 72
+End.229 deve receber 69
+End.230 deve receber 73
+End.231 deve receber 66
+End.232 deve receber 86
+End.233 deve receber 69
+End.234 deve receber 72
+End.235 deve receber 80
+End.236 deve receber 68
+End.237 deve receber 66
+End.238 deve receber 88
+End.239 deve receber 83
+End.240 deve receber 87
+End.241 deve receber 74
+End.242 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 25
+Teste 25
+End.192 recebe 225
+End.193 recebe 243
+End.194 recebe 5
+End.195 recebe 0
+End.225 recebe 65
+End.226 recebe 74
+End.227 recebe 67
+End.228 recebe 66
+End.229 recebe 89
+End.230 recebe 86
+End.231 recebe 83
+End.232 recebe 78
+End.233 recebe 80
+End.234 recebe 0
+End.243 deve receber 70
+End.244 deve receber 79
+End.245 deve receber 72
+End.246 deve receber 71
+End.247 deve receber 68
+End.248 deve receber 65
+End.249 deve receber 88
+End.250 deve receber 83
+End.251 deve receber 85
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 26
+Teste 26
+End.192 recebe 208
+End.193 recebe 233
+End.194 recebe 19
+End.195 recebe 0
+End.208 recebe 74
+End.209 recebe 73
+End.210 recebe 89
+End.211 recebe 78
+End.212 recebe 66
+End.213 recebe 86
+End.214 recebe 90
+End.215 recebe 73
+End.216 recebe 74
+End.217 recebe 71
+End.218 recebe 76
+End.219 recebe 70
+End.220 recebe 70
+End.221 recebe 84
+End.222 recebe 75
+End.223 recebe 66
+End.224 recebe 68
+End.225 recebe 71
+End.226 recebe 72
+End.227 recebe 87
+End.228 recebe 0
+End.233 deve receber 67
+End.234 deve receber 66
+End.235 deve receber 82
+End.236 deve receber 71
+End.237 deve receber 85
+End.238 deve receber 79
+End.239 deve receber 83
+End.240 deve receber 66
+End.241 deve receber 67
+End.242 deve receber 90
+End.243 deve receber 69
+End.244 deve receber 89
+End.245 deve receber 89
+End.246 deve receber 77
+End.247 deve receber 68
+End.248 deve receber 85
+End.249 deve receber 87
+End.250 deve receber 90
+End.251 deve receber 65
+End.252 deve receber 80
+End.253 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 27
+Teste 27
+End.192 recebe 200
+End.193 recebe 231
+End.194 recebe 19
+End.195 recebe 1
+End.200 recebe 75
+End.201 recebe 73
+End.202 recebe 0
+End.231 deve receber 82
+End.232 deve receber 80
+End.233 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 28
+Teste 28
+End.192 recebe 228
+End.193 recebe 243
+End.194 recebe 13
+End.195 recebe 1
+End.228 recebe 75
+End.229 recebe 87
+End.230 recebe 89
+End.231 recebe 72
+End.232 recebe 80
+End.233 recebe 77
+End.234 recebe 86
+End.235 recebe 70
+End.236 recebe 73
+End.237 recebe 83
+End.238 recebe 74
+End.239 recebe 0
+End.243 deve receber 88
+End.244 deve receber 74
+End.245 deve receber 76
+End.246 deve receber 85
+End.247 deve receber 67
+End.248 deve receber 90
+End.249 deve receber 73
+End.250 deve receber 83
+End.251 deve receber 86
+End.252 deve receber 70
+End.253 deve receber 87
+End.254 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 29
+Teste 29
+End.192 recebe 222
+End.193 recebe 240
+End.194 recebe 18
+End.195 recebe 1
+End.222 recebe 71
+End.223 recebe 81
+End.224 recebe 71
+End.225 recebe 66
+End.226 recebe 76
+End.227 recebe 73
+End.228 recebe 82
+End.229 recebe 82
+End.230 recebe 89
+End.231 recebe 71
+End.232 recebe 0
+End.240 deve receber 79
+End.241 deve receber 89
+End.242 deve receber 79
+End.243 deve receber 74
+End.244 deve receber 84
+End.245 deve receber 81
+End.246 deve receber 90
+End.247 deve receber 90
+End.248 deve receber 71
+End.249 deve receber 79
+End.250 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 30
+Teste 30
+End.192 recebe 248
+End.193 recebe 250
+End.194 recebe 13
+End.195 recebe 1
+End.248 recebe 77
+End.249 recebe 0
+End.250 deve receber 90
+End.251 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 31
+Teste 31
+End.192 recebe 213
+End.193 recebe 243
+End.194 recebe 17
+End.195 recebe 0
+End.213 recebe 84
+End.214 recebe 83
+End.215 recebe 67
+End.216 recebe 84
+End.217 recebe 87
+End.218 recebe 77
+End.219 recebe 86
+End.220 recebe 68
+End.221 recebe 75
+End.222 recebe 90
+End.223 recebe 0
+End.243 deve receber 75
+End.244 deve receber 74
+End.245 deve receber 84
+End.246 deve receber 75
+End.247 deve receber 78
+End.248 deve receber 68
+End.249 deve receber 77
+End.250 deve receber 85
+End.251 deve receber 66
+End.252 deve receber 81
+End.253 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 32
+Teste 32
+End.192 recebe 219
+End.193 recebe 238
+End.194 recebe 19
+End.195 recebe 0
+End.219 recebe 70
+End.220 recebe 68
+End.221 recebe 66
+End.222 recebe 72
+End.223 recebe 71
+End.224 recebe 77
+End.225 recebe 69
+End.226 recebe 72
+End.227 recebe 83
+End.228 recebe 83
+End.229 recebe 77
+End.230 recebe 87
+End.231 recebe 77
+End.232 recebe 76
+End.233 recebe 0
+End.238 deve receber 89
+End.239 deve receber 87
+End.240 deve receber 85
+End.241 deve receber 65
+End.242 deve receber 90
+End.243 deve receber 70
+End.244 deve receber 88
+End.245 deve receber 65
+End.246 deve receber 76
+End.247 deve receber 76
+End.248 deve receber 70
+End.249 deve receber 80
+End.250 deve receber 70
+End.251 deve receber 69
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 33
+Teste 33
+End.192 recebe 232
+End.193 recebe 243
+End.194 recebe 1
+End.195 recebe 0
+End.232 recebe 79
+End.233 recebe 81
+End.234 recebe 88
+End.235 recebe 83
+End.236 recebe 85
+End.237 recebe 86
+End.238 recebe 70
+End.239 recebe 77
+End.240 recebe 73
+End.241 recebe 0
+End.243 deve receber 80
+End.244 deve receber 82
+End.245 deve receber 89
+End.246 deve receber 84
+End.247 deve receber 86
+End.248 deve receber 87
+End.249 deve receber 71
+End.250 deve receber 78
+End.251 deve receber 74
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 34
+Teste 34
+End.192 recebe 225
+End.193 recebe 234
+End.194 recebe 10
+End.195 recebe 1
+End.225 recebe 76
+End.226 recebe 69
+End.227 recebe 83
+End.228 recebe 81
+End.229 recebe 67
+End.230 recebe 82
+End.231 recebe 73
+End.232 recebe 0
+End.234 deve receber 66
+End.235 deve receber 85
+End.236 deve receber 73
+End.237 deve receber 71
+End.238 deve receber 83
+End.239 deve receber 72
+End.240 deve receber 89
+End.241 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 35
+Teste 35
+End.192 recebe 199
+End.193 recebe 218
+End.194 recebe 24
+End.195 recebe 0
+End.199 recebe 69
+End.200 recebe 76
+End.201 recebe 71
+End.202 recebe 69
+End.203 recebe 87
+End.204 recebe 89
+End.205 recebe 82
+End.206 recebe 78
+End.207 recebe 83
+End.208 recebe 71
+End.209 recebe 72
+End.210 recebe 65
+End.211 recebe 86
+End.212 recebe 87
+End.213 recebe 74
+End.214 recebe 0
+End.218 deve receber 67
+End.219 deve receber 74
+End.220 deve receber 69
+End.221 deve receber 67
+End.222 deve receber 85
+End.223 deve receber 87
+End.224 deve receber 80
+End.225 deve receber 76
+End.226 deve receber 81
+End.227 deve receber 69
+End.228 deve receber 70
+End.229 deve receber 89
+End.230 deve receber 84
+End.231 deve receber 85
+End.232 deve receber 72
+End.233 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 36
+Teste 36
+End.192 recebe 220
+End.193 recebe 238
+End.194 recebe 21
+End.195 recebe 0
+End.220 recebe 87
+End.221 recebe 66
+End.222 recebe 69
+End.223 recebe 74
+End.224 recebe 86
+End.225 recebe 85
+End.226 recebe 66
+End.227 recebe 76
+End.228 recebe 66
+End.229 recebe 65
+End.230 recebe 73
+End.231 recebe 71
+End.232 recebe 79
+End.233 recebe 70
+End.234 recebe 0
+End.238 deve receber 82
+End.239 deve receber 87
+End.240 deve receber 90
+End.241 deve receber 69
+End.242 deve receber 81
+End.243 deve receber 80
+End.244 deve receber 87
+End.245 deve receber 71
+End.246 deve receber 87
+End.247 deve receber 86
+End.248 deve receber 68
+End.249 deve receber 66
+End.250 deve receber 74
+End.251 deve receber 65
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 37
+Teste 37
+End.192 recebe 209
+End.193 recebe 230
+End.194 recebe 24
+End.195 recebe 1
+End.209 recebe 66
+End.210 recebe 90
+End.211 recebe 79
+End.212 recebe 81
+End.213 recebe 77
+End.214 recebe 0
+End.230 deve receber 68
+End.231 deve receber 66
+End.232 deve receber 81
+End.233 deve receber 83
+End.234 deve receber 79
+End.235 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 38
+Teste 38
+End.192 recebe 248
+End.193 recebe 253
+End.194 recebe 14
+End.195 recebe 0
+End.248 recebe 0
+End.253 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 39
+Teste 39
+End.192 recebe 203
+End.193 recebe 237
+End.194 recebe 13
+End.195 recebe 1
+End.203 recebe 69
+End.204 recebe 73
+End.205 recebe 81
+End.206 recebe 85
+End.207 recebe 83
+End.208 recebe 0
+End.237 deve receber 82
+End.238 deve receber 86
+End.239 deve receber 68
+End.240 deve receber 72
+End.241 deve receber 70
+End.242 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 40
+Teste 40
+End.192 recebe 204
+End.193 recebe 227
+End.194 recebe 4
+End.195 recebe 0
+End.204 recebe 86
+End.205 recebe 72
+End.206 recebe 65
+End.207 recebe 73
+End.208 recebe 88
+End.209 recebe 70
+End.210 recebe 89
+End.211 recebe 73
+End.212 recebe 76
+End.213 recebe 66
+End.214 recebe 89
+End.215 recebe 65
+End.216 recebe 70
+End.217 recebe 79
+End.218 recebe 71
+End.219 recebe 80
+End.220 recebe 77
+End.221 recebe 75
+End.222 recebe 0
+End.227 deve receber 90
+End.228 deve receber 76
+End.229 deve receber 69
+End.230 deve receber 77
+End.231 deve receber 66
+End.232 deve receber 74
+End.233 deve receber 67
+End.234 deve receber 77
+End.235 deve receber 80
+End.236 deve receber 70
+End.237 deve receber 67
+End.238 deve receber 69
+End.239 deve receber 74
+End.240 deve receber 83
+End.241 deve receber 75
+End.242 deve receber 84
+End.243 deve receber 81
+End.244 deve receber 79
+End.245 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 41
+Teste 41
+End.192 recebe 207
+End.193 recebe 229
+End.194 recebe 21
+End.195 recebe 1
+End.207 recebe 82
+End.208 recebe 76
+End.209 recebe 90
+End.210 recebe 73
+End.211 recebe 67
+End.212 recebe 69
+End.213 recebe 88
+End.214 recebe 65
+End.215 recebe 66
+End.216 recebe 77
+End.217 recebe 69
+End.218 recebe 88
+End.219 recebe 77
+End.220 recebe 81
+End.221 recebe 65
+End.222 recebe 88
+End.223 recebe 90
+End.224 recebe 0
+End.229 deve receber 87
+End.230 deve receber 81
+End.231 deve receber 69
+End.232 deve receber 78
+End.233 deve receber 72
+End.234 deve receber 74
+End.235 deve receber 67
+End.236 deve receber 70
+End.237 deve receber 71
+End.238 deve receber 82
+End.239 deve receber 74
+End.240 deve receber 67
+End.241 deve receber 82
+End.242 deve receber 86
+End.243 deve receber 70
+End.244 deve receber 67
+End.245 deve receber 69
+End.246 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 42
+Teste 42
+End.192 recebe 199
+End.193 recebe 226
+End.194 recebe 6
+End.195 recebe 0
+End.199 recebe 70
+End.200 recebe 89
+End.201 recebe 90
+End.202 recebe 73
+End.203 recebe 79
+End.204 recebe 79
+End.205 recebe 90
+End.206 recebe 69
+End.207 recebe 66
+End.208 recebe 69
+End.209 recebe 86
+End.210 recebe 76
+End.211 recebe 87
+End.212 recebe 72
+End.213 recebe 83
+End.214 recebe 65
+End.215 recebe 78
+End.216 recebe 87
+End.217 recebe 84
+End.218 recebe 0
+End.226 deve receber 76
+End.227 deve receber 69
+End.228 deve receber 70
+End.229 deve receber 79
+End.230 deve receber 85
+End.231 deve receber 85
+End.232 deve receber 70
+End.233 deve receber 75
+End.234 deve receber 72
+End.235 deve receber 75
+End.236 deve receber 66
+End.237 deve receber 82
+End.238 deve receber 67
+End.239 deve receber 78
+End.240 deve receber 89
+End.241 deve receber 71
+End.242 deve receber 84
+End.243 deve receber 67
+End.244 deve receber 90
+End.245 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 43
+Teste 43
+End.192 recebe 212
+End.193 recebe 232
+End.194 recebe 11
+End.195 recebe 1
+End.212 recebe 80
+End.213 recebe 66
+End.214 recebe 84
+End.215 recebe 68
+End.216 recebe 81
+End.217 recebe 90
+End.218 recebe 86
+End.219 recebe 65
+End.220 recebe 78
+End.221 recebe 90
+End.222 recebe 77
+End.223 recebe 67
+End.224 recebe 81
+End.225 recebe 74
+End.226 recebe 67
+End.227 recebe 77
+End.228 recebe 0
+End.232 deve receber 69
+End.233 deve receber 81
+End.234 deve receber 73
+End.235 deve receber 83
+End.236 deve receber 70
+End.237 deve receber 79
+End.238 deve receber 75
+End.239 deve receber 80
+End.240 deve receber 67
+End.241 deve receber 79
+End.242 deve receber 66
+End.243 deve receber 82
+End.244 deve receber 70
+End.245 deve receber 89
+End.246 deve receber 82
+End.247 deve receber 66
+End.248 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 44
+Teste 44
+End.192 recebe 196
+End.193 recebe 220
+End.194 recebe 24
+End.195 recebe 1
+End.196 recebe 81
+End.197 recebe 68
+End.198 recebe 74
+End.199 recebe 87
+End.200 recebe 81
+End.201 recebe 71
+End.202 recebe 70
+End.203 recebe 77
+End.204 recebe 84
+End.205 recebe 67
+End.206 recebe 73
+End.207 recebe 86
+End.208 recebe 88
+End.209 recebe 90
+End.210 recebe 86
+End.211 recebe 68
+End.212 recebe 66
+End.213 recebe 86
+End.214 recebe 85
+End.215 recebe 69
+End.216 recebe 81
+End.217 recebe 0
+End.220 deve receber 83
+End.221 deve receber 70
+End.222 deve receber 76
+End.223 deve receber 89
+End.224 deve receber 83
+End.225 deve receber 73
+End.226 deve receber 72
+End.227 deve receber 79
+End.228 deve receber 86
+End.229 deve receber 69
+End.230 deve receber 75
+End.231 deve receber 88
+End.232 deve receber 90
+End.233 deve receber 66
+End.234 deve receber 88
+End.235 deve receber 70
+End.236 deve receber 68
+End.237 deve receber 88
+End.238 deve receber 87
+End.239 deve receber 71
+End.240 deve receber 83
+End.241 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 45
+Teste 45
+End.192 recebe 221
+End.193 recebe 234
+End.194 recebe 11
+End.195 recebe 1
+End.221 recebe 69
+End.222 recebe 86
+End.223 recebe 90
+End.224 recebe 68
+End.225 recebe 74
+End.226 recebe 79
+End.227 recebe 72
+End.228 recebe 87
+End.229 recebe 0
+End.234 deve receber 84
+End.235 deve receber 75
+End.236 deve receber 79
+End.237 deve receber 83
+End.238 deve receber 89
+End.239 deve receber 68
+End.240 deve receber 87
+End.241 deve receber 76
+End.242 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 46
+Teste 46
+End.192 recebe 208
+End.193 recebe 234
+End.194 recebe 10
+End.195 recebe 1
+End.208 recebe 75
+End.209 recebe 68
+End.210 recebe 77
+End.211 recebe 78
+End.212 recebe 72
+End.213 recebe 74
+End.214 recebe 78
+End.215 recebe 86
+End.216 recebe 67
+End.217 recebe 70
+End.218 recebe 88
+End.219 recebe 87
+End.220 recebe 84
+End.221 recebe 66
+End.222 recebe 90
+End.223 recebe 66
+End.224 recebe 0
+End.234 deve receber 65
+End.235 deve receber 84
+End.236 deve receber 67
+End.237 deve receber 68
+End.238 deve receber 88
+End.239 deve receber 90
+End.240 deve receber 68
+End.241 deve receber 76
+End.242 deve receber 83
+End.243 deve receber 86
+End.244 deve receber 78
+End.245 deve receber 77
+End.246 deve receber 74
+End.247 deve receber 82
+End.248 deve receber 80
+End.249 deve receber 82
+End.250 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 47
+Teste 47
+End.192 recebe 209
+End.193 recebe 232
+End.194 recebe 4
+End.195 recebe 0
+End.209 recebe 83
+End.210 recebe 76
+End.211 recebe 66
+End.212 recebe 67
+End.213 recebe 82
+End.214 recebe 75
+End.215 recebe 77
+End.216 recebe 79
+End.217 recebe 67
+End.218 recebe 66
+End.219 recebe 88
+End.220 recebe 77
+End.221 recebe 86
+End.222 recebe 78
+End.223 recebe 84
+End.224 recebe 85
+End.225 recebe 90
+End.226 recebe 73
+End.227 recebe 82
+End.228 recebe 70
+End.229 recebe 0
+End.232 deve receber 87
+End.233 deve receber 80
+End.234 deve receber 70
+End.235 deve receber 71
+End.236 deve receber 86
+End.237 deve receber 79
+End.238 deve receber 81
+End.239 deve receber 83
+End.240 deve receber 71
+End.241 deve receber 70
+End.242 deve receber 66
+End.243 deve receber 81
+End.244 deve receber 90
+End.245 deve receber 82
+End.246 deve receber 88
+End.247 deve receber 89
+End.248 deve receber 68
+End.249 deve receber 77
+End.250 deve receber 86
+End.251 deve receber 74
+End.252 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 48
+Teste 48
+End.192 recebe 207
+End.193 recebe 232
+End.194 recebe 6
+End.195 recebe 0
+End.207 recebe 67
+End.208 recebe 68
+End.209 recebe 82
+End.210 recebe 77
+End.211 recebe 84
+End.212 recebe 69
+End.213 recebe 90
+End.214 recebe 80
+End.215 recebe 73
+End.216 recebe 88
+End.217 recebe 83
+End.218 recebe 84
+End.219 recebe 76
+End.220 recebe 0
+End.232 deve receber 73
+End.233 deve receber 74
+End.234 deve receber 88
+End.235 deve receber 83
+End.236 deve receber 90
+End.237 deve receber 75
+End.238 deve receber 70
+End.239 deve receber 86
+End.240 deve receber 79
+End.241 deve receber 68
+End.242 deve receber 89
+End.243 deve receber 90
+End.244 deve receber 82
+End.245 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 49
+Teste 49
+End.192 recebe 203
+End.193 recebe 223
+End.194 recebe 6
+End.195 recebe 1
+End.203 recebe 65
+End.204 recebe 89
+End.205 recebe 84
+End.206 recebe 69
+End.207 recebe 79
+End.208 recebe 80
+End.209 recebe 69
+End.210 recebe 84
+End.211 recebe 76
+End.212 recebe 83
+End.213 recebe 70
+End.214 recebe 73
+End.215 recebe 81
+End.216 recebe 87
+End.217 recebe 76
+End.218 recebe 65
+End.219 recebe 0
+End.223 deve receber 85
+End.224 deve receber 83
+End.225 deve receber 78
+End.226 deve receber 89
+End.227 deve receber 73
+End.228 deve receber 74
+End.229 deve receber 89
+End.230 deve receber 78
+End.231 deve receber 70
+End.232 deve receber 77
+End.233 deve receber 90
+End.234 deve receber 67
+End.235 deve receber 75
+End.236 deve receber 81
+End.237 deve receber 70
+End.238 deve receber 85
+End.239 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Teste numero 50
+Teste 50
+End.192 recebe 218
+End.193 recebe 229
+End.194 recebe 23
+End.195 recebe 1
+End.218 recebe 66
+End.219 recebe 73
+End.220 recebe 69
+End.221 recebe 0
+End.229 deve receber 69
+End.230 deve receber 76
+End.231 deve receber 72
+End.232 deve receber 0
+Valor inicial do PC e' 0
+Numero maximo de instrucoes e' 65535
+
+Arquivo cifra.mem:
+ Teste 1: HLT -- Resultado correto
+  Executadas 258 instrucoes, com 614 leituras e 51 escritas (665 acessos)
+ Teste 2: HLT -- Resultado correto
+  Executadas 412 instrucoes, com 936 leituras e 75 escritas (1011 acessos)
+ Teste 3: HLT -- Resultado correto
+  Executadas 177 instrucoes, com 406 leituras e 31 escritas (437 acessos)
+ Teste 4: HLT -- Resultado correto
+  Executadas 324 instrucoes, com 764 leituras e 63 escritas (827 acessos)
+ Teste 5: HLT -- Resultado correto
+  Executadas 366 instrucoes, com 834 leituras e 67 escritas (901 acessos)
+ Teste 6: HLT -- Resultado correto
+  Executadas 198 instrucoes, com 470 leituras e 39 escritas (509 acessos)
+ Teste 7: HLT -- Resultado correto
+  Executadas 85 instrucoes, com 196 leituras e 15 escritas (211 acessos)
+ Teste 8: HLT -- Resultado correto
+  Executadas 377 instrucoes, com 861 leituras e 67 escritas (928 acessos)
+ Teste 9: HLT -- Resultado correto
+  Executadas 258 instrucoes, com 586 leituras e 47 escritas (633 acessos)
+ Teste 10: HLT -- Resultado correto
+  Executadas 452 instrucoes, com 1032 leituras e 83 escritas (1115 acessos)
+ Teste 11: HLT -- Resultado correto
+  Executadas 151 instrucoes, com 346 leituras e 27 escritas (373 acessos)
+ Teste 12: HLT -- Resultado correto
+  Executadas 241 instrucoes, com 551 leituras e 43 escritas (594 acessos)
+ Teste 13: HLT -- Resultado correto
+  Executadas 498 instrucoes, com 1190 leituras e 99 escritas (1289 acessos)
+ Teste 14: HLT -- Resultado correto
+  Executadas 530 instrucoes, com 1222 leituras e 99 escritas (1321 acessos)
+ Teste 15: HLT -- Resultado correto
+  Executadas 296 instrucoes, com 680 leituras e 55 escritas (735 acessos)
+ Teste 16: HLT -- Resultado correto
+  Executadas 391 instrucoes, com 896 leituras e 67 escritas (963 acessos)
+ Teste 17: HLT -- Resultado correto
+  Executadas 197 instrucoes, com 451 leituras e 35 escritas (486 acessos)
+ Teste 18: HLT -- Resultado correto
+  Executadas 579 instrucoes, com 1326 leituras e 99 escritas (1425 acessos)
+ Teste 19: HLT -- Resultado correto
+  Executadas 479 instrucoes, com 1096 leituras e 83 escritas (1179 acessos)
+ Teste 20: HLT -- Resultado correto
+  Executadas 63 instrucoes, com 146 leituras e 11 escritas (157 acessos)
+ Teste 21: HLT -- Resultado correto
+  Executadas 423 instrucoes, com 971 leituras e 71 escritas (1042 acessos)
+ Teste 22: HLT -- Resultado correto
+  Executadas 210 instrucoes, com 482 leituras e 39 escritas (521 acessos)
+ Teste 23: HLT -- Resultado correto
+  Executadas 274 instrucoes, com 630 leituras e 51 escritas (681 acessos)
+ Teste 24: HLT -- Resultado correto
+  Executadas 358 instrucoes, com 826 leituras e 67 escritas (893 acessos)
+ Teste 25: HLT -- Resultado correto
+  Executadas 217 instrucoes, com 496 leituras e 39 escritas (535 acessos)
+ Teste 26: HLT -- Resultado correto
+  Executadas 481 instrucoes, com 1101 leituras e 83 escritas (1184 acessos)
+ Teste 27: HLT -- Resultado correto
+  Executadas 56 instrucoes, com 132 leituras e 11 escritas (143 acessos)
+ Teste 28: HLT -- Resultado correto
+  Executadas 246 instrucoes, com 574 leituras e 47 escritas (621 acessos)
+ Teste 29: HLT -- Resultado correto
+  Executadas 218 instrucoes, com 518 leituras e 43 escritas (561 acessos)
+ Teste 30: HLT -- Resultado correto
+  Executadas 36 instrucoes, com 84 leituras e 7 escritas (91 acessos)
+ Teste 31: HLT -- Resultado correto
+  Executadas 251 instrucoes, com 576 leituras e 43 escritas (619 acessos)
+ Teste 32: HLT -- Resultado correto
+  Executadas 341 instrucoes, com 781 leituras e 59 escritas (840 acessos)
+ Teste 33: HLT -- Resultado correto
+  Executadas 213 instrucoes, com 486 leituras e 39 escritas (525 acessos)
+ Teste 34: HLT -- Resultado correto
+  Executadas 164 instrucoes, com 380 leituras e 31 escritas (411 acessos)
+ Teste 35: HLT -- Resultado correto
+  Executadas 373 instrucoes, com 856 leituras e 63 escritas (919 acessos)
+ Teste 36: HLT -- Resultado correto
+  Executadas 341 instrucoes, com 781 leituras e 59 escritas (840 acessos)
+ Teste 37: HLT -- Resultado correto
+  Executadas 118 instrucoes, com 278 leituras e 23 escritas (301 acessos)
+ Teste 38: HLT -- Resultado correto
+  Executadas 15 instrucoes, com 36 leituras e 3 escritas (39 acessos)
+ Teste 39: HLT -- Resultado correto
+  Executadas 122 instrucoes, com 282 leituras e 23 escritas (305 acessos)
+ Teste 40: HLT -- Resultado correto
+  Executadas 417 instrucoes, com 951 leituras e 75 escritas (1026 acessos)
+ Teste 41: HLT -- Resultado correto
+  Executadas 366 instrucoes, com 862 leituras e 71 escritas (933 acessos)
+ Teste 42: HLT -- Resultado correto
+  Executadas 445 instrucoes, com 1016 leituras e 79 escritas (1095 acessos)
+ Teste 43: HLT -- Resultado correto
+  Executadas 356 instrucoes, com 824 leituras e 67 escritas (891 acessos)
+ Teste 44: HLT -- Resultado correto
+  Executadas 438 instrucoes, com 1046 leituras e 87 escritas (1133 acessos)
+ Teste 45: HLT -- Resultado correto
+  Executadas 184 instrucoes, com 428 leituras e 35 escritas (463 acessos)
+ Teste 46: HLT -- Resultado correto
+  Executadas 354 instrucoes, com 822 leituras e 67 escritas (889 acessos)
+ Teste 47: HLT -- Resultado correto
+  Executadas 459 instrucoes, com 1046 leituras e 83 escritas (1129 acessos)
+ Teste 48: HLT -- Resultado correto
+  Executadas 305 instrucoes, com 696 leituras e 55 escritas (751 acessos)
+ Teste 49: HLT -- Resultado correto
+  Executadas 358 instrucoes, com 826 leituras e 67 escritas (893 acessos)
+ Teste 50: HLT -- Resultado correto
+  Executadas 76 instrucoes, com 180 leituras e 15 escritas (195 acessos)
+ Executadas um total de 14547 instrucoes, com 33570 leituras e 2658 escritas (36228 acessos)
+ Todos os testes corretos
+
