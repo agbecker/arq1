@@ -1,0 +1,10 @@
+; Dada uma matriz
+; Selecionar uma célula
+; Informa os endereços das 8 células ao seu redor
+
+org h80
+matriz: dab [25]
+fronteiras: dab [8]
+
+
+org 0

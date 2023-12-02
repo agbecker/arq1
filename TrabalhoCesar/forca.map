@@ -1,20 +1,6 @@
 Símbolo         Valor Decimal   Valor Hexadecimal
 -------         -------------   -----------------
-VISOR_INI               65499                FFDB
-VISOR_END               65534                FFFE
-STRING_END              65526                FFF6
-VIDAS_INI               65527                FFF7
-TECLADO_ON              65498                FFDA
-TECLADO_INPUT           65499                FFDB
-TIMER_SET               65495                FFD7
-INTERRUPT                   0                   0
-NUM_VIDAS               32768                8000
-STRING                  32770                8002
-RETURN_STR_LEN          32796                801C
-MENSAGEM_INI            32798                801E
-MENSAGEM_INI_WRITE      32796                801C
-STR_LEN                     5                   5
-LOOP_STR_LEN                7                   7
-FIM_STR_LEN                25                  19
-DISPLAY_INICIAL            30                  1E
-ESCREVE_INICIAL            42                  2A
+TECST                   65498                FFDA
+TECDT                   65499                FFDB
+VISOR                   65500                FFDC
+MAIN_LOOP                   2                   2

@@ -1,0 +1,16 @@
+Símbolo         Valor Decimal   Valor Hexadecimal
+-------         -------------   -----------------
+END_SRC                   192                  C0
+END_DEST                  193                  C1
+PASSO_INFORMADO           194                  C2
+DECIFRA                   195                  C3
+ITERADOR                  185                  B9
+PASSO                     186                  BA
+LETRA                     187                  BB
+ESCREVE_PASSO              11                   B
+LOOP                       13                   D
+FIM                        37                  25
+CIFRA                      46                  2E
+FIM_CIFRA                  64                  40
+COMPENSA_BAIXA             66                  42
+COMPENSA_ALTA              72                  48

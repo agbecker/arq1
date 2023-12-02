@@ -1,8 +1,20 @@
 Símbolo         Valor Decimal   Valor Hexadecimal
 -------         -------------   -----------------
-LINHA                     128                  80
-COLUNA                    129                  81
 MATRIZ                    220                  DC
+X1                        229                  E5
+X2                        230                  E6
+X3                        231                  E7
 DET_L                     240                  F0
 DET_H                     241                  F1
-AUMENTA                     6                   6
+S1                        242                  F2
+S2                        243                  F3
+SOMA_L                    244                  F4
+SOMA_H                    245                  F5
+MULT_L                    246                  F6
+MULT_H                    247                  F7
+DIAGONAL                    5                   5
+MULTIPLICA                  6                   6
+SOMA                        7                   7
+PROX_SOMA                  18                  12
+RESTO3                     24                  18
+RETORNA_RESTO3             32                  20

@@ -1,0 +1,62 @@
+
+1. Instruções para o uso do MetaRamses:
+
+	1 - Copie o executável (MetaRamses.exe) para a mesma pasta onde estão os arquivos de memória do Ramses a serem testados
+	2 - Copie o script de teste (<file-name>.RAC) para esta mesma pasta
+	3 - Execute o MetaRamses
+	4 - Quando ele pedir um arquivo de comandos, selecione <file-name>.RAC
+	5 - Quando o MetaRamses terminar (ele é bem rápido), é criado na mesma pasta o arquivo <file-name>.RAS, com uma descrição do resultado dos testes (abra com o seu editor de texto preferido e verifique os resultados)
+     
+	Os tempos de referencia são listados no arquivo <file-name>.RAS, na parte que descreve cada teste.
+
+	Notar que o MetaRamses considera todos os arquivos .MEM da pasta como sendo arquivos a serem testados.
+	Assim, para não produzir efeitos indesejados, remova desta pasta todos os arquivos .MEM que não sejam uma solução para o problema.
+	
+2. Comandos
+
+	Para controlar a aplicação do MetaRamses, é necessário construir o arquivo com os vetores de teste através de uma série de comandos.
+	Os eventuais parâmetros desses comandos são colocados nas linhas seguintes e essas linhas de parâmetros só encerram quando for encontrado um novo comando.
+	
+	A forma dos comandos é um "ponto" seguido de uma letra.
+	
+	Existem dois tipos de comandos: PUBLICOS e PRIVADOS
+	Os comando PUBLICOS podem ser colocados em arquivos de descrição e passados para os alunos efetuarem seus testes.
+	Os comandos PRIVADOS geram resultados e fazem análises que podem ser usadas para identificar eventuais "cópias".
+	
+	Ainda, os comandos podem ser classificados quanto ao seu escopo: a DESCRIÇÃO ou a um TESTE.
+	
+2.1. Comandos PUBLICOS
+
+	2.1.1. Comandos de escopo de DESCRIÇÃO
+	
+		.c	Segue texto de comentários (esse comando existe nos dois escopos).
+		.m	Segue o número máximo de instruções que podem ser executadas, antes de indicar estouro de tempo.
+				Util para limitar o tempo de execução dos programas.
+		.l	Gera LOG dos erros encontrados nos testes, indicando o valor correto e o valor fornecido pela execução.
+		.d	Gera LOG de Desempenho, indicando o número de leituras, escritas e de instruções realizadas até atingir o HLT.
+		.t	Comando que indica o início de um caso de teste.
+	
+	2.1.2. Comando de escopo de TESTE
+	
+		.c	Segue texto de comentários. Esses comentários aparecem no arquivo de resultados.
+		.i	Segue uma linha para cada valor a ser carregado na memoria, antes da execucao (formato <end>=<dado>)
+		.o	Segue uma linha para cada valor a ser verificado da memória, após o final da execução (formato <end>=<dado>)
+		.p	Segue o valor que o PC deve receber, antes de iniciar a rodar o programa. Se esse comando não for usado, o valor default será "0".
+
+2.2. Comandos PRIVADOS
+
+	2.2.1. Comandos de escopo de DESCRIÇÃO
+	
+		.x	Gera arquivo de resultados para excel
+		.n	Análise de NOPs e pseudo-NOPs
+		.av	Ativa a detecção de alteração de código
+		.r	Realiza teste com recarga do programa antes de cada teste
+
+3. Exemplo de descrição
+
+	Vide arquivo de exemplo
+
+
+
+
+

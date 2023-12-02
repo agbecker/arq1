@@ -1,0 +1,75 @@
+; Álvaro Guglielmin Becker
+; 00301391
+
+; Memória (especificações do trabalho)
+org 192
+end_src: db 
+end_dest: db 
+passo_informado: db
+decifra: db
+
+; Variáveis
+org 185
+iterador: db
+passo: db
+letra: db
+
+; Programa
+org 0
+ldr a #0
+str a iterador ; Zera o iterador
+
+; Se o propósito for decifrar, torna o passo negativo
+ldr a passo_informado
+ldr b decifra
+jz escreve_passo
+neg a
+escreve_passo: str a passo
+
+; Percorre a string de origem e chama a cifragem
+; para cada letra
+
+loop: ldr x end_src ; Carrega o indicador do começo da string origem
+add x iterador
+ldr a 0, x ; Acessa o i-ésimo caractere da string
+jz fim ; Se for \0, encerra o programa
+jsr cifra ; Cifra a letra carregada em RA
+ldr x end_dest ; Carrega o indicador do começo da string destino
+add x iterador
+str a 0, x ; Escreve a letra cifrada
+ldr b iterador
+add b #1
+str b iterador ; Incrementa o iterador em 1
+jmp loop ; Retorna ao começo do laço
+fim: ldr b #0
+ldr x end_dest
+add x iterador
+str b 0, x ; Termina a string destino com \0
+hlt
+
+; Função cifra
+cifra: nop
+add a passo ; Soma o passo à letra a ser cifrada
+str a letra ; Salva provisoriamente a letra cifrada
+
+; Verifica se é menor que 65
+sub a #65
+jn compensa_baixa
+
+; Verifica se é maior que 80
+ldr a letra
+neg a
+add a #90
+jn compensa_alta
+
+ldr a letra
+; Fim da função
+fim_cifra: jmp cifra, i
+
+compensa_baixa: ldr a letra
+add a #26
+jmp fim_cifra
+
+compensa_alta: ldr a letra
+sub a #26
+jmp fim_cifra
