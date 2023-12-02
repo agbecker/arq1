@@ -32,7 +32,7 @@ num_vidas: dw
 string: dab [26]
 
 return_str_len: dw
-mensagem_ini: dab 'Jogo da forca! Digite sua palavra:', 0
+mensagem_ini: dab 'Jogo da forca! Digite a palavra:', 0
 mensagem_ini_write: equ mensagem_ini-2
 
 
