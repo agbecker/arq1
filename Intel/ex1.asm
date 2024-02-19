@@ -5,7 +5,7 @@
 	CR 			equ	0Dh
 	LF			equ 0Ah
 
-	file_in		db	'a.in', 0
+	file_in		db	'in1.txt', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
 	handle_out	dw	0
@@ -16,6 +16,7 @@
 
 		.code
 		.startup
+		; Inicializacoes
 		mov num_linhas, 0
 
 		lea dx, file_in
@@ -23,13 +24,19 @@
 		lea dx, file_out
 		call fcreate
 
-		call read_line
-		lea bx, string
-		call printf_s
+		; Enquanto nao for EOF
+		main_loop:
+			call getChar
+			cmp ax, 0
+			je EOF
+			call moveBack
+			; Le linha
+			call read_line
+			lea bx, string
+			call printf_s
 
-		call read_line
-		lea bx, string
-		call printf_s
+		EOF:
+
 
 		.exit
 
@@ -106,8 +113,9 @@ printf_s	endp
 ; -> char em dl e cursor em AX se CF == 0
 ; senao, deu ruim
 getChar	proc	near
-	mov		ah,3fh
-	mov		cx,1
+	mov		bx, handle_in
+	mov		ah, 3fh
+	mov		cx, 1
 	lea		dx, gotten_char
 	int		21h
 	mov		dl, gotten_char
@@ -120,7 +128,6 @@ read_line proc	near
 	mov dl, 0
 
 	loop_readline:
-		mov bx, handle_in
 		call getChar
 		
 		;; Verifica final de arquivo
@@ -140,7 +147,6 @@ read_line proc	near
 		jmp loop_readline
 
 	EOL:
-		mov bx, handle_in
 		call getChar
 		cmp dl, CR
 		je EOL2

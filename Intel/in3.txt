@@ -1,0 +1,8 @@
+120, 	130,	127
+121,	119,	125
+123,	124
+fim
+
+Sergio Cechin
+01/02/2024
+Arquivo com TABs
