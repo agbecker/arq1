@@ -13,6 +13,7 @@
 	gotten_char db 	0
 	index		dw  0
 	num_linhas	dw	0
+	debug		db 'caralho', 0
 
 		.code
 		.startup
@@ -27,14 +28,14 @@
 		; Enquanto nao for EOF
 		main_loop:
 			call getChar
-			cmp dl, 'f'
-			je EOF
+			;cmp dl, 'f'
+			;je EOF
 			call moveBack
 			; Le linha
 			call read_line
 			lea bx, string
 			call printf_s
-			jmp main_loop
+			;jmp main_loop
 
 		EOF:
 			mov bx, handle_in
@@ -200,9 +201,10 @@ read_line endp
 ; File* (bx) -> Null
 moveBack proc	near
 	mov ah, 42h
+	mov al, 1
 	mov bx, handle_in
 	mov cx, -1
-	mov dx, 0
+	mov dx, -1
 	int 21h
 	ret
 moveBack endp
