@@ -18,7 +18,7 @@
 		lea dx, file_out
 		call fcreate
 
-		call readLine
+		call read_line
 		lea bx, string
 		call printf_s
 
@@ -108,7 +108,7 @@ getChar	proc	near
 getChar	endp
 
 ; Lê arquivo inteiro
-readLine proc	near
+read_line proc	near
 	mov	index, 0
 	mov dl, 0
 
@@ -128,7 +128,7 @@ readLine proc	near
 		add bx, offset string
 		mov [bx], 0
 		ret
-readLine endp	
+read_line endp	
 
 ; Retorna o ponteiro de arquivo em um caractere
 ; File* (bx) -> Null
