@@ -4,8 +4,8 @@
 		.data
 	file_in		db	'a.in', 0
 	file_out	db  'a.out', 0
-	handle_in	dw
-	handle_out	dw
+	handle_in	dw 	0
+	handle_out	dw	0
 	string 		db	50 dup (0)
 
 		.code
