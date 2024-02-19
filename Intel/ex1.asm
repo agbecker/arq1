@@ -28,14 +28,14 @@
 		; Enquanto nao for EOF
 		main_loop:
 			call getChar
-			;cmp dl, 'f'
-			;je EOF
+			cmp ax, 0
+			je EOF
 			call moveBack
 			; Le linha
 			call read_line
 			lea bx, string
 			call printf_s
-			;jmp main_loop
+			jmp main_loop
 
 		EOF:
 			mov bx, handle_in
