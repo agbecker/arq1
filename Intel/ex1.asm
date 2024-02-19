@@ -34,8 +34,13 @@
 			call read_line
 			lea bx, string
 			call printf_s
+			jmp main_loop
 
 		EOF:
+			mov bx, handle_in
+			call fclose
+			mov bx, handle_out
+			call fclose
 
 
 		.exit
@@ -71,6 +76,19 @@ fcreate	proc	near
 	mov		handle_out,ax
 	ret
 fcreate	endp
+
+; fclose: File* (bx) -> Boolean (CF)
+; Obj.: evitar um memory leak fechando o arquivo
+; Ex.:
+; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
+; call fclose
+; -> Se deu certo, CF == 0
+; (Recomendo zerar o filePtr pra voce nao fazer merda)
+fclose	proc	near
+	mov		ah,3eh
+	int		21h
+	ret
+fclose	endp
 
 ; printf_s: String (bx) -> void
 ; Obj.: dado uma String, escreve a string na tela
