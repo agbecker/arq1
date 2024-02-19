@@ -1,0 +1,52 @@
+; Álvaro Guglielmin Becker
+; 00301391
+
+; Algoritmo básico:
+; while(true):
+;    while(início do jogo):
+;        mensagem de início
+;        if(jogador digita) : break
+;    insere palavra a adivinhar
+;    while(palavra não adivinhada AND vidas > 0):
+;        lê letra
+;        if(letra existe) : revela na palavra
+;        else : vidas -= 1
+;    mensagem de final
+;    inicio do jogo = true
+
+; Constantes
+visor_ini: equ hFFDC
+visor_end: equ hFFFE
+string_end: equ hFFF6
+vidas_ini: equ hFFF7
+stack: equ h8000
+
+teclado_on: equ hFFDA
+teclado_input: equ  hFFDB
+
+timer_set: equ hFFD7
+interrupt: hFFD8
+
+; Memória
+org h8000
+num_vidas: dw
+string: dab [26]
+
+posicao_escrita: dw
+return_str_len: dw
+mensagem_comeco: dab 0, 'Jogo da forca! Digite a palavra:', 0
+mensagem_vitoria: dab 0, 'Voce ganhou!', 0
+mensagem_derrota: dab 0, 'Voce perdeu :(', 0
+mensagem_num_vidas: dab 0, 'Numero de tentativas (1 a 99): ', 0
+mensagem_erro_vidas: dab 0, 'Valor invalido. Tente de novo: ', 0
+
+
+letra_input: dw 'A'
+
+
+; Main
+org 0
+mov #stack, r6
+
+
+hlt

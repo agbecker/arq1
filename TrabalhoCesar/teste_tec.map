@@ -1,0 +1,22 @@
+Símbolo         Valor Decimal   Valor Hexadecimal
+-------         -------------   -----------------
+VISOR_INI               65500                FFDC
+VISOR_END               65535                FFFF
+STRING_END              65526                FFF6
+VIDAS_INI               65527                FFF7
+STACK                   32768                8000
+TECLADO_ON              65498                FFDA
+TECLADO_INPUT           65499                FFDB
+TIMER_SET               65495                FFD7
+INTERRUPT                   0                   0
+NUM_VIDAS               32768                8000
+STRING                  32770                8002
+POSICAO_ESCRITA         32796                801C
+RETURN_STR_LEN          32798                801E
+MENSAGEM_COMECO         32800                8020
+MENSAGEM_VITORIA        32834                8042
+MENSAGEM_DERROTA        32848                8050
+MENSAGEM_NUM_VIDAS      32864                8060
+MENSAGEM_ERRO_VIDAS     32897                8081
+LETRA_INPUT             32930                80A2
+LOOP                        4                   4
