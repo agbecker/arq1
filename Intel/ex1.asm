@@ -89,8 +89,6 @@ ps_1:
 printf_s	endp
 
 
-		end
-
 ; getChar: File* (bx) -> Char (dl) Inteiro (AX) Boolean (CF)
 ; Obj.: Dado um arquivo, devolve um caractere, a posicao do cursor e define CF como 0 se a leitura deu certo (diferente do getchar() do C, mais pra um getc(FILE*))
 ; Ex.:
@@ -140,3 +138,5 @@ moveBack proc	near
 	int 21h
 	ret
 moveBack endp
+
+		end
