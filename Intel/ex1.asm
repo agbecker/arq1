@@ -2,59 +2,39 @@
 		.stack
 
 		.data
-	filename	db	'teste.txt', 0
-	numero		db 	'456', 0
+	file_in		db	'a.in', 0
+	file_out	db  'a.out', 0
+	handle_in	dw
+	handle_out	dw
+	string 		db	50 dup (0)
 
 		.code
 		.startup
 
-		mov bx, offset numero
-		call atoi
-		mov bx, offset filename
+		lea dx, file_in
+		call fopen
+		lea bx, file_in
 		call printf_s
 
 		.exit
 
 
-; atoi: String (bx) -> Inteiro (ax)
-; Obj.: recebe uma string e transforma em um inteiro
-; Ex:
-; lea bx, String1 (Em que String1 é db "2024",0)
-; call atoi
-; -> devolve o numero 2024 em ax
-atoi	proc near
 
-		; A = 0;
-		mov		ax,0
-		
-atoi_2:
-		; while (*S!='\0') {
-		cmp		byte ptr[bx], 0
-		jz		atoi_1
+; fopen: String (dx) -> File* (handle_in) Boolean (CF)		(Passa o File* para o ax tambem, mas por algum motivo ele move pro bx)
+; Obj.: Dado o caminho para um arquivo, devolve o ponteiro desse arquivo e define CF como 0 se o processo deu certo
+; Ex.:
+; lea dx, fileName		(em que fileName eh "temaDeCasa/feet/feet1.png",0) (Talvez a orientacao das barras varie com o sistema operacional, na duvida coloca tudo dentro de WORK pra poder usar so o nome do arquivo)
+; call fopen
+; -> bx recebe a imagem e CF (carry flag) nao ativa
+; ou -> bx recebe lixo e CF ativa
+fopen	proc	near
+	mov		al,0
+	mov		ah,3dh
+	int		21h
+	mov		handle_in,ax
+	ret
+fopen	endp
 
-		; 	A = 10 * A
-		mov		cx,10
-		mul		cx
-
-		; 	A = A + *S
-		mov		ch,0
-		mov		cl,[bx]
-		add		ax,cx
-
-		; 	A = A - '0'
-		sub		ax,'0'
-
-		; 	++S
-		inc		bx
-		
-		;}
-		jmp		atoi_2
-
-atoi_1:
-		; return
-		ret
-
-atoi	endp
 
 ; printf_s: String (bx) -> void
 ; Obj.: dado uma String, escreve a string na tela
