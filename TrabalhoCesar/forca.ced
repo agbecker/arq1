@@ -1,73 +1,254 @@
-; ?lvaro Guglielmin Becker
+; Alvaro Guglielmin Becker
 ; 00301391
 
-; Algoritmo b?sico:
+; Algoritmo basico:
 ; while(true):
-;    while(in?cio do jogo):
-;        mensagem de in?cio
+;    while(inicio do jogo):
+;        mensagem de inicio
 ;        if(jogador digita) : break
 ;    insere palavra a adivinhar
-;    while(palavra n?o adivinhada AND vidas > 0):
-;        l? letra
+;    while(palavra nao adivinhada AND vidas > 0):
+;        le letra
 ;        if(letra existe) : revela na palavra
 ;        else : vidas -= 1
 ;    mensagem de final
 ;    inicio do jogo = true
 
 ; Constantes
-visor_ini: equ hFFDB
-visor_end: equ hFFFE
+visor_ini: equ hFFDC
+visor_end: equ hFFFF
 string_end: equ hFFF6
 vidas_ini: equ hFFF7
+tempo_ini: equ hFFFB
+stack: equ h8000
 
 teclado_on: equ hFFDA
 teclado_input: equ  hFFDB
 
-timer_set: equ hFFD7
-interrupt: hFFD8
+isr_end: equ hFFBE
+timer_data: equ hFFD7
+interrupt_status: equ hFFD8
+interrupt_enable: equ hFFD9
 
-; Mem?ria
+; Memoria
 org h8000
 num_vidas: dw
 string: dab [26]
 
+posicao_escrita: dw
 return_str_len: dw
-mensagem_ini: dab 'Jogo da forca! Digite sua palavra:', 0
-mensagem_ini_write: equ mensagem_ini-2
+mensagem_comeco: dab 0, 'Jogo da forca! Digite a palavra:', 0
+mensagem_vitoria: dab 0, 'Voce ganhou!', 0
+mensagem_derrota: dab 0, 'Voce perdeu :(', 0
+mensagem_num_vidas: dab 0, 'Numero de tentativas (1 a 99): ', 0
+mensagem_erro_vidas: dab 0, 'Valor invalido. Tente de novo: ', 0
 
+erro_int: dab 0, 'MAH QUE BOSTA', 0
+
+
+letra_input: dw 'A'
+
+minutos: dw
+segundos: dw
+quart_segundo: dw
 
 ; Main
 org 0
-jsr r7, display_inicial
+
+; Inicializacoes
+mov #stack, r6	; Inicializa stack
+mov #h81, interrupt_enable	; Habilita interrupção de timer
+mov #1, timer_data  ; Configura periodo do relogio
+clr teclado_on ; Habilita leitura do teclado
+mov #isr, isr_end  ; Assinala endereco da subrotina de interrupcao
+; Zera tempo contado
+clr minutos
+clr segundos
+clr quart_segundo
+
+mov #minutos, r0
+;mov #tempo_ini, r3
+;mov #':', 2(r3)
+
+main_loop:
+cmp segundos, #3
+blt main_loop
+clr interrupt_enable
+
+;jsr r7, escreve_tempo
 hlt
 
+; ISR
+isr:
+	mov r0, -(r6)
+	mov r1, -(r6)
+	mov r2, -(r6)
+	mov r3, -(r6)
+	mov r4, -(r6)
+	mov r5, -(r6)
+
+	
+	inc quart_segundo
+	cmp quart_segundo, #100
+	blt fim_isr
+	; Se passarem 4*250 milissegundos, aumenta 1 segundo
+	clr quart_segundo
+	inc segundos
+	cmp segundos, #60
+	blt fim_isr
+	; Se passarem 60 segundos, aumenta 1 minuto
+	clr segundos
+	inc minutos
+
+	fim_isr: 
+	mov (r6)+, r5
+	mov (r6)+, r4
+	mov (r6)+, r3
+	mov (r6)+, r2
+	mov (r6)+, r1
+	mov (r6)+, r0
+
+	jsr r7, escreve_tempo
+
+	rti
 
 ; Funcoes
-str_len: ; Armazena na vari?vel return_str_len o tamanho de uma string
-             ; Recebe in?cio da string em R1
-             ; !! Altera R1, R2, R3 !!
+str_len: ; Armazena na variavel return_str_len o tamanho de uma string
+            ; Recebe inicio da string em R1
+            ; !! Altera R1, R2, R3 !!
 
-clr r2 ; R2 armazena o tamanho da string
-loop_str_len:
-mov (r1), r3
-and #h00FF, r3
-cmp r3, #0 ; Verifica se ? o final da string
-beq fim_str_len
-inc r1
-inc r2
-br loop_str_len
+	clr r2 ; R2 armazena o tamanho da string
+	loop_str_len:
+	mov (r1), r3
+	and #h00FF, r3
+	cmp r3, #0 ; Verifica se eh o final da string
+	beq fim_str_len
+	inc r1
+	inc r2
+	br loop_str_len
 
-fim_str_len:
-mov r2, return_str_len
-rts r7
+	fim_str_len:
+	mov r2, return_str_len
+	rts r7
 
-display_inicial: ; Escreve a mensagem de in?cio no visor
-                        ; !! Altera R1 !!
-mov #mensagem_ini-1, r1
-jsr r7, str_len
-mov return_str_len, r1
+valida_input: ; Verifica se o que foi digitado eh um caractere valido
+		; !! Modifica R2 !!
+	clr r2
+	
+	; Calcula uma pontuacao para o caractere digitado
+	cmp letra_input, #'A'
+	bcc val1
+	sub #4, r2
+	val1: cmp letra_input, #'-'
+	bne val2
+	add #4, r2
+	val2: cmp letra_input, #'Z'
+	bhi val3
+	inc r2
+	val3: cmp letra_input, #'a'
+	bcs val4
+	inc r2
+	val4: cmp letra_input, #'z'
+	bls val_fim
+	sub #4, r2
+	
+	; eh valido apenas se a pontuacao for 1
+	val_fim: cmp #1, r2
+	beq char_valido
+	
+	char_invalido: ;jsr r7, display_inicial ; Substituir com mensagem de erro
+	hlt
+	
+	char_valido: jsr r7, to_upper
+	rts r7
 
-escreve_inicial:
-mov mensagem_ini_write(r1), visor_ini(r1)
-sob r1, escreve_inicial
-rts r7
+to_upper: ; Converte letra minuscula para maiuscula
+		; Converte letra_input
+		; !! Nao altera registrador !!
+
+	; Se ja for maiuscula, ou for hifen, apenas retorna
+	cmp letra_input, #'Z'
+	bls fim_to_upper
+
+	; Torna maiuscula
+	sub #h0020, letra_input
+	
+	fim_to_upper: rts r7
+
+escreve_no_visor: ; Recebe comeco da string a escrever em R1
+		; !! Modifica R1, R2, R3, R4 !!
+	mov r1, r4 ; Copia o endereco da string para R4
+	jsr r7, clear_visor ; Limpa o visor
+	mov r4, r1
+	jsr r7, str_len ; R2 tera o tamanho da string
+	
+	mov r2, posicao_escrita ; Coloca a posicao de escrita apos a string impressa
+
+	add r2, r4
+	loop_escreve: mov (r4), visor_ini(r2)
+	dec r4
+	sob r2, loop_escreve
+	mov (r4), visor_ini
+	rts r7
+
+clear_visor: ; Limpa o visor
+			; !! Modifica R1 !!
+
+	mov #visor_end, r1
+	sub #visor_ini, r1
+	
+	loop_clear:
+	mov #' ', visor_ini(r1)
+	sob r1, loop_clear
+	mov #' ', visor_ini
+	rts, r7
+
+escreve_tempo: ; Escreve tempo decorrido no visor
+				; !! Modifica R1, R2, R3 !!
+	jsr r7, clear_visor
+	mov #tempo_ini, r3
+
+	mov minutos, r1
+	jsr r7, resto_por_dez
+	add #h30, r1
+	mov r1, 1(r3)
+	mov minutos, r1
+	jsr r7, divide_por_dez
+	add #h30, r2
+	mov r2, (r3)
+
+	mov #':', 2(r3)
+
+	mov segundos, r1
+	jsr r7, resto_por_dez
+	add #h30, r1
+	mov r1, 4(r3)
+	mov segundos, r1
+	jsr r7, divide_por_dez
+	add #h30, r2
+	mov r2, 3(r3)
+
+	rts r7
+
+divide_por_dez: ; Divide o valor em R1 por 10, deixa o quociente em R2
+				; !! Modifica R1, R2 !!
+	clr r2
+	asr r1
+
+	loop_divisao: 
+	cmp r1, #5
+	blt fim_divisao
+	sub #5, r1
+	inc r2
+	br loop_divisao
+
+	fim_divisao: rts, r7
+
+resto_por_dez: ; Obtem o mod 10 do valor em R1; deixa o resultado em R1
+				; !! Modifica R1 !!
+	loop_resto:
+	cmp r1, #10
+	blt fim_resto
+	sub #10, r1
+	br loop_resto
+	fim_resto: rts r7
