@@ -1,0 +1,703 @@
+; Alvaro Guglielmin Becker
+; 00301391
+
+
+; CONSTANTES
+offset_vidas: equ 26 ; Posicao no visor para escrever o numero de vidas
+offset_tempo: equ 16
+to_upper: equ h20 ; Valor somado a letra minuscula para torna-la maiuscula
+enter: equ 13 ; Codigo ASCII da tecla enter
+backspace: equ 8 ; Codigo ASCII da tecla backspace
+tam_max_palavra: equ 25 ; Tamanho maximo da palavra
+
+; ENDERECOS
+stack: equ hFF80
+end_isr: equ hFFBE
+timer_data: equ hFFD7
+int_status: equ hFFD8
+int_enable: equ hFFD9
+teclado_status: equ hFFDA
+teclado_data: equ hFFDB
+visor_ini: equ hFFDC
+visor_fim: equ hFFFF
+
+; MEMORIA
+org h8000
+
+num_vidas: dw ; Numero de vidas do jogador
+
+palavra_certa: dab [25], 0 ; Palavra que deve ser adivinhada
+;palavra_certa: dab 'Miss Americana & The HBP', 0
+
+org h801E ; Garante 25 bytes para a palavra certa
+
+tam_palavra_certa: dw ; Tamanho da palavra a ser adivinhada
+
+palavra_mostrada: dab [25], 0 ; Versao da palavra que eh mostrada no visor
+
+letras_por_adivinhar: dw ; Quantas letras falta para a vitoria
+
+corresponde: dw ; Flag de se a letra foi chutada existe na palavra
+
+; Variáveis de contagem de tempo
+minutos: dw
+segundos: dw
+quart_segundo: dw
+
+; Variáveis para uso impressao de valores
+dezena: dw
+unidade: dw
+
+; Posicoes minima e maxima do cursor para insercao de valores
+cursor_min: dw
+cursor_max: dw
+
+input_usuario: dw ; Tecla digitada pelo usuario
+
+tamanho_string: dw ; Retorno da funcao str_len
+
+modo_teclado: dw ; Flag de o que estara sendo digitado
+    ; 'P': palavra a ser adivinhada
+    ; 'N': numero de vidas
+    ; 'L': letra chutada para a palavra
+    ; 'Q': qualquer tecla para continuar
+
+; Strings
+mensagem_inicio: dab 'Digite sua palavra:', 0
+mensagem_vidas: dab 'Vidas:[  ]', 0
+mensagem_quantas_vidas: dab 'Numero de tentativas: ', 0
+mensagem_vitoria: dab 'Voce ganhou!!!', 0
+mensagem_derrota: dab 'Voce perdeu :(', 0
+mensagem_tempo: dab 'Tempo de jogo: ', 0
+
+; MAIN
+org 0
+
+
+; Inicializações
+mov #stack, r6
+mov #isr, end_isr
+clr teclado_status
+clr int_status
+mov #h82, int_enable ; Interrupcao apenas do teclado
+mov #250, timer_data
+
+; Loop principal
+
+    main:
+    clr input_usuario
+    ; Escreve mensagem de inicio do jogo
+    jsr r7, clear_visor
+    mov #mensagem_inicio, -(r6)
+    mov #0, -(r6)
+    jsr r7, escreve_string
+
+    mov #'L', modo_teclado ; Sinaliza que aguarda que o jogador digite uma letra
+
+    aguarda_palavra: ; Espera jogador digitar a primeira letra
+        cmp input_usuario, #0
+        beq aguarda_palavra
+
+    ; Quando o jogador tiver digitado a primeira letra
+    jsr r7, clear_visor
+    mov #'P', modo_teclado ; Sinaliza que o jogador esta digitando a palavra
+    mov input_usuario, visor_ini
+    mov #1, r0 ; R0 indica a posicao do visor em que se esta escrevendo (cursor)
+    clr input_usuario
+
+    mov #0, cursor_min
+    mov #tam_max_palavra, cursor_max
+
+    aguarda_enter: ; Enquanto o jogador nao der enter
+        cmp input_usuario, #0
+        beq aguarda_enter ; Faz nada enquanto nao for uma entrada valida
+
+        cmp input_usuario, #'>' ; Se o jogador tiver dado enter
+        beq valida_palavra
+
+        cmp input_usuario, #'<' ; Se o jogador tiver dado backspace
+        bne digitou_letra_palavra
+        jsr r7, apaga_letra
+        br aguarda_enter
+
+        digitou_letra_palavra:
+        ; Caso contrario, adiciona letra a palavra
+        jsr r7, insere_letra
+        br aguarda_enter
+
+    valida_palavra:
+        cmp r0, cursor_min ; Se a palavra for vazia, eh invalida
+        beq aguarda_enter
+        jsr r7, clear_palavras
+        jsr r7, registra_palavra
+    
+    pre_pergunta_num_vidas:
+    clr input_usuario
+    ; Pergunta ao usuario quantas vidas para o jogo
+    mov #'N', modo_teclado ; Indica que o teclado devera ler numeros
+    jsr r7, clear_visor
+    mov #mensagem_quantas_vidas, -(r6)
+    mov #0, -(r6)
+    jsr r7, escreve_string
+    mov tamanho_string, cursor_min ; O cursor comeca logo apos a string
+    mov cursor_min, r0
+    mov cursor_min, cursor_max
+    add #2, cursor_max
+
+    pergunta_num_vidas: ; Enquanto o jogador nao der enter
+        cmp input_usuario, #0
+        beq pergunta_num_vidas ; Faz nada enquanto nao for uma entrada valida
+
+        cmp input_usuario, #'>' ; Se o jogador tiver dado enter
+        beq valida_num_vidas
+
+        cmp input_usuario, #'<' ; Se o jogador tiver dado backspace
+        bne digitou_num_vidas
+        jsr r7, apaga_letra
+        br pergunta_num_vidas
+
+        digitou_num_vidas:
+        ; Caso contrario, adiciona digito ao visor
+        jsr r7, insere_letra
+        br pergunta_num_vidas
+
+    valida_num_vidas:
+        cmp r0, cursor_min ; Se o numero for vazio, eh invalido
+        beq pergunta_num_vidas
+        jsr r7, registra_num_vidas
+        cmp num_vidas, #0
+        beq pre_pergunta_num_vidas ; As vidas nao podem ser 0
+
+    jsr r7, clear_visor
+    jsr r7, mostra_palavra
+    jsr r7, escreve_vidas
+    clr input_usuario
+    mov #'L', modo_teclado
+
+    ; Habilita o relogio
+    clr minutos
+    clr segundos
+    clr quart_segundo
+    mov #h83, int_enable
+
+    loop_adivinha_letra:
+        cmp num_vidas, #0
+        beq derrota
+
+        cmp letras_por_adivinhar, #0
+        beq vitoria
+
+        cmp input_usuario, #0
+        beq loop_adivinha_letra ; Enquanto o usuario nao chutar uma letra
+
+        mov input_usuario, -(r6)
+        jsr r7, busca_letra
+        jsr r7, mostra_palavra
+        jsr r7, escreve_vidas
+        clr input_usuario
+        br loop_adivinha_letra
+
+    derrota:
+        and #hFE, int_enable ; Desabilita o timer
+        jsr r7, clear_visor
+        mov #mensagem_derrota, -(r6)
+        mov #0, -(r6)
+        jsr r7, escreve_string
+        jsr r7, escreve_tempo_total
+
+        mov #'Q', modo_teclado
+
+        br aguarda_reset
+
+    vitoria:
+
+        and #hFE, int_enable ; Desabilita o timer
+        mov #'Q', modo_teclado
+        jsr r7, clear_visor
+        jsr r7, mostra_palavra
+        
+        ; Mostra a palavra completa enquanto o jogador nao apertar nenhuma tecla
+        palavra_completa: cmp input_usuario, #0
+        beq palavra_completa
+        
+        clr input_usuario
+        jsr r7, clear_visor
+        mov #mensagem_vitoria, -(r6)
+        mov #0, -(r6)
+        jsr r7, escreve_string
+        jsr r7, escreve_tempo_total
+
+        br aguarda_reset
+
+    aguarda_reset:
+    cmp input_usuario, #0
+    beq aguarda_reset
+    jmp main
+
+; ISR
+isr:
+    ; Empilha registradores
+    mov r0, -(r6)
+
+    mov int_status, r0
+
+    ; Encontra qual interrupcao tratar
+    and #2, r0
+    if_timer: beq timer_interrupt ; Trata interrupcao por timer
+    if_teclado: br teclado_interrupt ; Trata interrupcao por teclado
+
+    fim_interrupt:
+    clr int_status ; Limpa flag de interrupcao
+    ; Desempilha registradores
+    mov (r6)+, r0
+    rti
+
+    timer_interrupt:
+        ; Trata a interrupcao por timer
+        ; Contando o tempo decorrido
+        and #hFE, int_enable ; Desabilita interrupcao por timer
+
+        ; A cada periodo do timer, passa-se 1/4 de segundo
+        inc quart_segundo
+        cmp quart_segundo, #4
+        blt fim_timer_interrupt
+
+        ; Completa um segundo
+        clr quart_segundo
+        inc segundos
+        cmp segundos, #60
+        blt fim_timer_interrupt
+
+        ; Completa um minuto
+        clr segundos
+        inc minutos
+
+        fim_timer_interrupt:
+        or #h01, int_enable ; Reabilita interrupcao por timer
+        br fim_interrupt
+
+    teclado_interrupt:
+        ; Trata a interrupcao por teclado
+        and #hFD, int_enable ; Desabilita interrupcao por teclado
+
+        ; Avalia o caso de aceitar qualquer tecla
+        cmp modo_teclado, #'Q'
+        beq caso_qualquer
+
+        ; Avalia se o usuario pode ter digitado enter ou backspace
+        ; no caso de nao estar chutando a letra
+        cmp modo_teclado, #'L'
+        beq caso_letra
+
+        jsr r7, tecla_especial
+        cmp teclado_status, #0
+        beq fim_teclado_interrupt ; Se tiver sido tecla especial, encerra a interrupcao
+
+        cmp modo_teclado, #'N' ; Caso esteja digitando o numero de vidas
+        bne caso_letra
+        jsr r7, valida_num
+        cmp teclado_status, #0
+        beq fim_teclado_interrupt
+        br input_invalido
+
+        caso_qualquer:
+        mov #'*', input_usuario
+        br fim_teclado_interrupt
+
+        caso_letra:
+        jsr r7, valida_letra
+        cmp teclado_status, #0
+        beq fim_teclado_interrupt
+
+        input_invalido:
+        clr input_usuario
+
+        fim_teclado_interrupt:
+        clr teclado_status
+        or #h02, int_enable ; Reabilita interrupcao por teclado
+        jmp fim_interrupt
+
+; FUNCOES
+insere_letra: ;()
+    ; Insere letra na palavra, se possivel
+    cmp r0, cursor_max ; Verifica se nao foi atingido o maximo tamanho da palavra
+    beq fim_insere_letra
+
+    mov input_usuario, visor_ini(r0)
+    clr input_usuario
+    inc r0
+
+    fim_insere_letra: rts r7
+
+apaga_letra: ;()
+    ; Apaga letra da palavra, se possivel
+    cmp r0, cursor_min ; Verifica se a palavra nao eh vazia
+    beq fim_apaga_letra
+
+    dec r0
+    mov #' ', visor_ini(r0) ; Apaga letra na posicao atual
+    clr input_usuario
+
+    fim_apaga_letra: rts r7
+
+tecla_especial: ;()
+    ; Verifica se o usuario digitou enter ou backspace
+    if_enter:
+    cmp teclado_data, #enter
+    bne if_backspace
+    mov #'>', input_usuario
+    clr teclado_status ; Sinaliza que a tecla foi validada
+    br fim_tecla_especial
+
+    if_backspace:
+    cmp teclado_data, #backspace
+    bne fim_tecla_especial
+    mov #'<', input_usuario
+    clr teclado_status ; Sinaliza que a tecla foi validada
+
+    fim_tecla_especial: rts r7
+
+valida_letra: ;()
+    ; Verifica que o usuario digitou uma letra ou hifen
+    ; Altera R0
+    mov teclado_data, r0
+
+    cmp r0, #'-' ; Se for hifen, eh valido
+    beq caso_hifen
+
+    cmp r0, #'Z'
+    bls if_maiuscula ; Verifica se eh maiuscula
+
+    sub #to_upper, r0 ; Torna a letra maiuscula
+
+    if_maiuscula:
+        cmp r0, #'A'
+        blt fim_valida_letra ; Invalida se for menor que A maiusculo
+        cmp r0, #'Z'
+        bgt fim_valida_letra ; Invalida se for maior que Z maiusculo
+
+        mov r0, input_usuario
+        clr teclado_status
+
+    fim_valida_letra: rts r7
+
+    caso_hifen:
+        mov #'-', input_usuario
+        clr teclado_status
+        br fim_valida_letra
+
+valida_num: ;()
+    ; Verifica que o usuario digitou um numero
+    ; Altera R0
+    mov teclado_data, r0
+
+    cmp r0, #'0'
+    blt fim_valida_num
+    cmp r0, #'9'
+    bgt fim_valida_num
+
+    clr teclado_status
+    mov r0, input_usuario
+
+    fim_valida_num: rts r7
+
+base_dez: ;(num)
+    ; Divide um numero em dezena e unidade
+    ; Altera R0, R1
+    mov 2(r6), r1
+    clr r0
+
+    loop_base_dez:
+        cmp r1, #10
+        blt fim_base_dez
+        sub #10, r1
+        inc r0
+        br loop_base_dez
+    fim_base_dez:
+    mov r0, dezena
+    mov r1, unidade
+
+    mov (r6)+, (r6) ; Desempilha
+    rts r7
+
+escreve_numero: ;(pos_visor)
+    ; Escreve um numero com dezena e unidade
+    ; em posicao especifica do visor
+    ; Altera R0, R1
+
+    mov 2(r6), r0
+    mov dezena, r1
+    add #'0', r1
+    mov r1, visor_ini(r0) ; Escreve dezena
+    sub dezena, r1
+    add unidade, r1
+    inc r0
+    mov r1, visor_ini(r0) ; Escreve unidade
+
+    mov (r6)+, (r6) ; Desempilha
+    rts r7
+
+escreve_tempo: ;(pos_visor)
+    ; Escreve os minutos e segundos no visor
+    ; na posicao informada
+    ; Altera R2 + R0, R1
+    mov 2(r6), r2 ; R2 armazena posicao de escrita
+
+    mov minutos, -(r6)
+    jsr r7, base_dez
+    mov r2, -(r6)
+    jsr r7, escreve_numero
+
+    add #2, r2
+    mov #':', visor_ini(r2)
+    inc r2
+    
+    mov segundos, -(r6)
+    jsr r7, base_dez
+    mov r2, -(r6)
+    jsr r7, escreve_numero
+
+    mov (r6)+, (r6) ; Desempilha
+    rts r7
+
+clear_visor: ;()
+    ; Limpa o visor
+    ; Altera R0, R1
+
+    mov #36, r0
+    clr r1
+    loop_clear_visor:
+        mov #' ', visor_ini(r1)
+        inc r1
+        sob r0, loop_clear_visor
+    rts r7
+
+str_len: ;(end_string)
+    ; Encontra tamanho de uma string
+    ; Altera R0, R1
+
+    mov 2(r6), r0 ; R0 recebe endereco da string
+    dec r0
+    clr tamanho_string
+
+    loop_str_len:
+        mov (r0), r1 ; R1 tem o caracter atual da string
+        and #h00FF, r1 ; Avalia se caracter eh \0
+        beq fim_str_len
+        inc r0
+        inc tamanho_string
+        br loop_str_len
+    
+    fim_str_len:
+    mov (r6)+, (r6) ; Desempilha
+    rts r7
+
+escreve_string: ;(end_string, pos_visor)
+    ; Escreve string no visor
+    ; na posicao informada
+    ; Altera R2 + R0, R1
+
+    mov 4(r6), r2 ; R2 tem o endereco da string
+
+    mov r2, -(r6)
+    jsr r7, str_len ; Encontra o tamanho da string
+    
+    dec r2
+
+    mov tamanho_string, r0
+
+    mov 2(r6), r1 ; R1 tem a posicao de escrita no visor
+    add #visor_ini, r1
+
+    loop_escreve_string:
+        mov (r2), (r1) ; Escreve cada caractere no visor
+        inc r1
+        inc r2
+        sob r0, loop_escreve_string
+
+    ; Desempilha
+    mov (r6), 4(r6)
+    add #4, r6
+    rts r7
+
+censura_palavra: ;()
+    ; Copia a palavra_certa para palavra_mostrada,
+    ; substituindo as letras por underlines
+    ; Registra o numero de letras que deverao ser adivinhadas
+    ; Altera R0, R1, R2
+
+    mov tam_palavra_certa, r0 ; R0 contara as iteracoes
+    mov #-1, r1 ; R1 percorrera as strings
+
+    clr letras_por_adivinhar
+
+    loop_censura:
+        mov palavra_certa(r1), r2
+        and #h00FF, r2 ; Obtem a letra na posicao da palavra
+        cmp r2, #'-' ; Hifen nao eh alterado
+        beq transfere_letra
+        inc letras_por_adivinhar
+        mov #'_', r2
+        transfere_letra: and #hFF00, palavra_mostrada(r1)
+        or r2, palavra_mostrada(r1) ; Passa o caractere adequado para a palavra censurada
+        inc r1
+        sob r0, loop_censura
+    
+    rts r7
+
+registra_palavra: ;()
+    ; Registra a palavra digitada como sendo a palavra_certa,
+    ; registra seu tamanho e censura
+    ; Altera R0, R1, R2, R3
+
+    mov r0, tam_palavra_certa ; O tamanho da palavra corresponde ao cursor
+    
+    clr r1 ; R1 iterara sobre o visor
+    mov #palavra_certa-1, r2 ; R2 iterara sobre a palavra certa
+
+    loop_registra_palavra:
+        and #hFF00, (r2) ; Limpa a parte baixa da word apontada por R2
+        mov visor_ini(r1), r3
+        or r3, (r2) ; Transfere a letra no cursor para a parte baixa apontada por R2
+        inc r1
+        inc r2
+        sob r0, loop_registra_palavra
+
+    and #hFF00, (r2) ; Termina com um '\0'
+
+    jsr r7, censura_palavra
+
+    rts r7
+
+registra_num_vidas: ;()
+    ; Registra o numero de vidas do jogador
+    ; Altera R1, R2
+    
+    cmp r0, cursor_max ; Se o numero tiver dois digitos
+    beq caso_dois_digitos
+    ; Se so tiver um digito
+    mov cursor_min, r1
+    mov visor_ini(r1), r1 ; R1 tem o valor
+
+    fim_registra_num_vidas:
+    sub #'0', r1
+    mov r1, num_vidas
+    rts r7
+
+    caso_dois_digitos:
+        mov cursor_min, r1
+        mov visor_ini(r1), r1 ; R1 tem o valor da dezena
+        sub #'0', r1
+        
+        ; Multiplica R1 por 10
+        asl r1 
+        mov r1, r2
+        asl r1
+        asl r1
+        add r2, r1
+
+        mov r0, r2
+        dec r2
+        add visor_ini(r2), r1 ; Soma o valor da unidade a R1
+        br fim_registra_num_vidas
+
+escreve_vidas: ;()
+    ; Escreve a string mostrando o numero de vidas
+    ; Altera R0, R1 + R2
+    mov #mensagem_vidas, -(r6)
+    mov #offset_vidas, -(r6)
+    jsr r7, escreve_string
+
+    mov num_vidas, -(r6)
+    jsr r7, base_dez
+    
+    mov #offset_vidas, r0
+    add tamanho_string, r0
+    sub #3, r0
+    mov dezena, visor_ini(r0)
+    add #'0', visor_ini(r0)
+    inc r0
+    mov unidade, visor_ini(r0)
+    add #'0', visor_ini(r0)
+
+    rts r7
+
+mostra_palavra: ;()
+    ; Escreve a palavra_mostrada
+
+    mov #palavra_mostrada, -(r6)
+    mov #0, -(r6)
+    jsr r7, escreve_string
+    rts r7
+
+escreve_tempo_total: ;()
+    ; Escreve a mensagem do tempo de jogo
+    
+    mov #mensagem_tempo, -(r6)
+    mov #offset_tempo, -(r6)
+    jsr r7, escreve_string
+
+    mov #offset_tempo, r0
+    add tamanho_string, r0
+    mov r0, -(r6)
+    jsr r7, escreve_tempo
+
+    rts r7
+
+busca_letra: ;(letra)
+    ; Busca se a letra chutada consta na palavra
+    ; Se sim, revela todas as ocorrencias
+    ; Se não, diminui uma vida
+    ; Altera R0, R1, R2, R3
+
+    ;hlt
+
+    mov 2(r6), r1 ; R1 tem a letra
+    mov tam_palavra_certa, r0 ; R0 conta para percorrer a palavra
+    mov #-1, r2 ; R2 percorrera as palavras certa e mostrada
+    clr corresponde ; Comeca sem ter achado a letra na palavra
+
+    loop_busca_letra:
+        mov palavra_certa(r2), r3
+        and #h00FF, r3 ; Pega a letra atual da palavra em R3
+        cmp r3, r1 ; Compara com a letra que se busca
+        bne prox_busca_letra
+
+        inc corresponde
+        
+        mov palavra_mostrada(r2), r3
+        and #h00FF, r3 ; Pega a letra atual da palavra em R3
+        cmp r3, #'_' ; Caso essa letra ainda nao tenha sido revelada
+        bne prox_busca_letra
+        dec letras_por_adivinhar
+        and #hFF00, palavra_mostrada(r2)
+        or r1, palavra_mostrada(r2) ; Revela a letra
+
+        prox_busca_letra:
+        inc r2
+        sob r0, loop_busca_letra
+
+    cmp corresponde, #0
+    beq letra_errada ; Se nao houve nenhuma correspondencia
+    br fim_busca_letra
+
+    letra_errada:
+        dec num_vidas
+    fim_busca_letra:
+    mov (r6)+, (r6) ; Desempilha
+    rts r7
+
+clear_palavras: ;()
+    ; Preenche as palavra_certa e palavra_mostrada com zeros
+    ; Altera R4, R5
+
+    mov #tam_max_palavra, r4
+    clr r5
+
+    loop_clear_palavras:
+        clr palavra_certa(r5)
+        clr palavra_mostrada(r5)
+        inc r5
+        sob r4, loop_clear_palavras
+
+    rts r7

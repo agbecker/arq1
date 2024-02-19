@@ -58,7 +58,7 @@ org 0
 ; Inicializacoes
 mov #stack, r6	; Inicializa stack
 mov #h81, interrupt_enable	; Habilita interrupção de timer
-mov #250, timer_data  ; Configura periodo do relogio
+mov #1, timer_data  ; Configura periodo do relogio
 clr teclado_on ; Habilita leitura do teclado
 mov #isr, isr_end  ; Assinala endereco da subrotina de interrupcao
 ; Zera tempo contado
@@ -89,7 +89,7 @@ isr:
 
 	
 	inc quart_segundo
-	cmp quart_segundo, #4
+	cmp quart_segundo, #100
 	blt fim_isr
 	; Se passarem 4*250 milissegundos, aumenta 1 segundo
 	clr quart_segundo

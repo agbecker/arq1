@@ -1,0 +1,11 @@
+org 800
+
+int: dw h3030
+char: dab '00'
+
+org 0
+
+mov int, r0
+mov char, r1
+
+hlt
