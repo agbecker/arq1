@@ -155,6 +155,14 @@ read_line proc	near
 		mov bx, index
 		add bx, offset string
 		mov [bx], 0
+
+		; Apenas para impressao
+		mov [bx], CR
+		inc bx
+		mov [bx], LF
+		inc bx
+		mov [bx], 0
+
 		ret
 
 	;EOF:
