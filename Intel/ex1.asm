@@ -7,12 +7,18 @@
 	handle_in	dw 	0
 	handle_out	dw	0
 	string 		db	50 dup (0)
+	gotten_char db 	0
+	index		dw  0
 
 		.code
 		.startup
 
 		lea dx, file_in
 		call fopen
+		lea dx, file_out
+		call fcreate
+		lea bx, file_in
+
 		lea bx, file_in
 		call printf_s
 
@@ -35,6 +41,20 @@ fopen	proc	near
 	ret
 fopen	endp
 
+; fcreate: String (dx) -> File* (bx) Boolean (CF)
+; Obj.: Dado o caminho para um arquivo, cria um novo arquivo com dado nome em tal caminho e devolve seu ponteiro, define CF como 0 se o processo deu certo
+; Ex.:
+; lea dx, fileName		(em que fileName eh "fatos/porQueChicoEhOMelhor.txt",0) (Talvez a orientacao das barras varie com o sistema operacional, na duvida coloca tudo dentro de WORK pra poder usar so o nome do arquivo)
+; call fcreate
+; -> bx recebe o txt e CF (carry flag) nao ativa
+; ou -> bx recebe lixo e CF ativa
+fcreate	proc	near
+	mov		cx,0
+	mov		ah,3ch
+	int		21h
+	mov		handle_out,ax
+	ret
+fcreate	endp
 
 ; printf_s: String (bx) -> void
 ; Obj.: dado uma String, escreve a string na tela
@@ -70,3 +90,30 @@ printf_s	endp
 
 
 		end
+
+; getChar: File* (bx) -> Char (dl) Inteiro (AX) Boolean (CF)
+; Obj.: Dado um arquivo, devolve um caractere, a posicao do cursor e define CF como 0 se a leitura deu certo (diferente do getchar() do C, mais pra um getc(FILE*))
+; Ex.:
+; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
+; call getChar
+; -> char em dl e cursor em AX se CF == 0
+; senao, deu ruim
+getChar	proc	near
+	mov		ah,3fh
+	mov		cx,1
+	lea		dx, gotten_char
+	int		21h
+	mov		dl, gotten_char
+	ret
+getChar	endp
+
+; Retorna o ponteiro de arquivo em um caractere
+; File* (bx) -> Null
+moveBack proc	near
+	mov ah, 42h
+	mov al, 1
+	mov cx, 0
+	mov dx, -1
+	int 21h
+	ret
+moveBack endp
