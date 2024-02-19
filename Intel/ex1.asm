@@ -2,6 +2,9 @@
 		.stack
 
 		.data
+	CR 			equ	0Dh
+	LF			equ 0Ah
+
 	file_in		db	'a.in', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
@@ -9,14 +12,20 @@
 	string 		db	50 dup (0)
 	gotten_char db 	0
 	index		dw  0
+	num_linhas	dw	0
 
 		.code
 		.startup
+		mov num_linhas, 0
 
 		lea dx, file_in
 		call fopen
 		lea dx, file_out
 		call fcreate
+
+		call read_line
+		lea bx, string
+		call printf_s
 
 		call read_line
 		lea bx, string
@@ -105,7 +114,7 @@ getChar	proc	near
 	ret
 getChar	endp
 
-; Lê arquivo inteiro
+; Lê linha do arquivo
 read_line proc	near
 	mov	index, 0
 	mov dl, 0
@@ -113,19 +122,46 @@ read_line proc	near
 	loop_readline:
 		mov bx, handle_in
 		call getChar
-		cmp ax, 0
-		je EOF
+		
+		;; Verifica final de arquivo
+		;cmp ax, 0
+		;je EOF
+
+		; Verifica final de linha
+		cmp dl, CR
+		je EOL
+		cmp dl, LF
+		je EOL
+
 		mov bx, index
 		add bx, offset string
 		mov [bx], dl
 		inc index
 		jmp loop_readline
 
-	EOF:
+	EOL:
+		mov bx, handle_in
+		call getChar
+		cmp dl, CR
+		je EOL2
+		cmp dl, LF
+		je EOL2
+
+		; Caso tenha lido o próximo caractere e não seja um de quebra de linha,
+		; move o ponteiro de arquivo uma posição para trás
+		call moveBack
+	EOL2:
+		inc num_linhas
 		mov bx, index
 		add bx, offset string
 		mov [bx], 0
 		ret
+
+	;EOF:
+	;	mov bx, index
+	;	add bx, offset string
+	;	mov [bx], 0
+	;	ret
 read_line endp	
 
 ; Retorna o ponteiro de arquivo em um caractere
