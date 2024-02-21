@@ -25,7 +25,7 @@
 	tensao		dw  3 dup (-1)
 	temp_char	db  0
 	modo_parse	db	0
-	volt_index  db 	0
+	volt_index  dw 	0
 	arquivo_valido 	db 	1
 
 	; Mensagens
@@ -301,13 +301,13 @@ verif_numero endp
 compoe_numero proc near
 	mov ax, [bx]
 	; Caso seja espaco branco, o proximo deve ser virgula
-	comp al, TAB
+	cmp al, TAB
 	je compoe_space
-	comp al, SPACE
+	cmp al, SPACE
 	je compoe_space
 
 	; Caso seja virgula, encerra o numero
-	comp al, ','
+	cmp al, ','
 	je compoe_virgula
 
 	; Caso não seja número, é inválido
@@ -322,7 +322,8 @@ compoe_numero proc near
 	mov bx, volt_index
 	add bx, offset tensao
 	mov ax, [bx]
-	mul 10
+	mov cx, 10
+	mul cx
 	add al, temp_char
 	ret
 
