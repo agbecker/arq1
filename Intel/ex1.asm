@@ -248,10 +248,21 @@ parse_line proc	near
 		jne parse1
 		call verif_numero
 		jmp next_parse
+		
 		parse1:
 		cmp modo_parse, AGUARDA_NOV
-		jne next_parse
+		jne parse2
 		call compoe_numero
+		jmp next_parse
+		
+		parse2:
+		cmp modo_parse, AGUARDA_VIRGULA
+		jne parse3
+		call espera_virgula
+		jmp next_parse
+		
+		parse3:
+		call espera_endl
 
 		next_parse:
 		inc index
@@ -298,6 +309,7 @@ verif_numero proc near
 
 verif_numero endp
 
+; Computa valor da tensao a partir dos numeros informados na linha
 compoe_numero proc near
 	mov ax, [bx]
 	; Caso seja espaco branco, o proximo deve ser virgula
@@ -325,6 +337,7 @@ compoe_numero proc near
 	mov cx, 10
 	mul cx
 	add al, temp_char
+	mov [bx], ax
 	ret
 
 	compoe_space:
@@ -355,6 +368,17 @@ compoe_numero proc near
 compoe_numero endp
 
 
+espera_virgula proc near
 
+	ret
+
+espera_virgula endp
+
+
+espera_endl proc near
+
+	ret
+
+espera_endl endp
 
 		end
