@@ -38,6 +38,10 @@
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
 	aux_str		db	aux_len dup (0)
+	tempo		db	9 dup (0)
+	horas		dw	0
+	minutos		dw  0
+	segundos	dw	0
 
 	vmin		dw	0
 	vmax 		dw 	0
@@ -625,5 +629,30 @@ sw_continua2:
 	ret
 		
 sprintf_w	endp
+
+
+; Recebe segundos decorridos em AX
+; Retorna string com o tempo a ser escrito em 'tempo'
+calcula_tempo	proc 	near
+	mov bx, ax ; copia ax para bx
+
+	div 3600 
+	mov horas, ax
+	mul 3600
+	sub bx, ax
+	mov ax, bx
+	div 60
+	mov minutos, ax
+	mul 60
+	sub bx, ax
+	mov segundos, bx
+
+	mov index, 0
+
+	ret	
+
+calcula_tempo	endp
+	
+
 
 		end
