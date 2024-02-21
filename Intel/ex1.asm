@@ -258,24 +258,24 @@ parse_line proc	near
 parse_line endp
 
 verif_numero proc near
-	mov char, [bx]
-	cpm char, SPACE
+	mov ax, [bx]
+	cmp al, SPACE
 	jne verif1
 	ret
 
 	verif1:
-	cpm char, TAB
+	cmp al, TAB
 	jne verif2
 	ret
 
 	verif2:
-	cmp char, '0'
+	cmp al, '0'
 	jb verif_invalido
-	cmp char, '9'
+	cmp al, '9'
 	ja verif_invalido
 	; Se for um digito numerico
 	mov volt_index, 0
-	mov tensao, char
+	mov tensao, ax
 	sub tensao, '0'
 	ret
 
