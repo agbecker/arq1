@@ -240,16 +240,17 @@ moveBack endp
 ; Interpreta a linha salva na variavel string para validacao
 parse_line proc	near
 	mov index, 0
+	mov modo_parse, AGUARDA_NUMERO
 
 	loop_parse:
 		mov bx, index
 		add bx, offset string
-		cmp [bx], AGUARDA_NUMERO
+		cmp modo_parse, AGUARDA_NUMERO
 		jne parse1
 		call verif_numero
 		jmp next_parse
 		parse1:
-		cmp [bx], AGUARDA_NOV
+		cmp modo_parse, AGUARDA_NOV
 		jne next_parse
 		;call compoe_numero
 
