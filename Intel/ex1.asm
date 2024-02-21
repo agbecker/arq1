@@ -86,6 +86,13 @@
 			mov linha_valida, 1
 			call parse_line
 
+			; Verifica validade da linha
+			cmp linha_valida, 1
+			je imprime
+			call informa_linha_errada
+			jmp main_loop
+
+			imprime:
 			; Testa impressao
 			lea bx, string
 			call printf_s
