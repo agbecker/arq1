@@ -449,7 +449,7 @@ espera_endl proc near
 	je endl_space
 
 	mov arquivo_valido, 0
-	mov linha_valida, 0s
+	mov linha_valida, 0
 
 	endl_space:
 	ret
