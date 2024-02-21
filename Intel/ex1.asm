@@ -27,6 +27,7 @@
 	modo_parse	db	0
 	volt_index  db 	0
 	arquivo_valido 	db 	1
+	char		db	0
 
 		.code
 		.startup
@@ -257,23 +258,24 @@ parse_line proc	near
 parse_line endp
 
 verif_numero proc near
-	cpm [bx], SPACE
+	mov char, [bx]
+	cpm char, SPACE
 	jne verif1
 	ret
 
 	verif1:
-	cpm [bx], TAB
+	cpm char, TAB
 	jne verif2
 	ret
 
 	verif2:
-	cmp [bx], '0'
+	cmp char, '0'
 	jb verif_invalido
-	cmp [bx], '9'
+	cmp char, '9'
 	ja verif_invalido
 	; Se for um digito numerico
 	mov volt_index, 0
-	mov tensao, [bx]
+	mov tensao, char
 	sub tensao, '0'
 	ret
 
