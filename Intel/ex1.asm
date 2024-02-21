@@ -29,6 +29,9 @@
 	arquivo_valido 	db 	1
 	char		db	0
 
+	; Mensagens
+	msg_inv_file	db	'Arquivo com erro', CR, LF, 0
+
 		.code
 		.startup
 		; Inicializacoes
@@ -281,6 +284,9 @@ verif_numero proc near
 
 	verif_invalido:
 	mov arquivo_valido, 0
+
+	mov bx, msg_inv_file
+	call printf_s
 	ret
 
 	
