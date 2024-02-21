@@ -256,7 +256,8 @@ parse_line proc	near
 
 		next_parse:
 		inc index
-		cmp index, string_len
+		mov ax, index
+		cmp ax, string_len
 		je end_parse
 		jmp loop_parse
 
