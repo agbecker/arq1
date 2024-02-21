@@ -4,6 +4,14 @@
 		.data
 	CR 			equ	0Dh
 	LF			equ 0Ah
+	SPACE		equ	20h
+	TAB			equ 09h
+
+	; Enums
+	AGUARDA_NUMERO	equ	0
+	AGUARDA_NOV		equ 1 ; Aguarda numero ou virgula
+	AGUARDA_VIRGULA equ 2
+	AGUARDA_FIM_LINHA	equ	3
 
 	file_in		db	'in1.txt', 0
 	file_out	db  'a.out', 0
@@ -13,7 +21,9 @@
 	gotten_char db 	0
 	index		dw  0
 	num_linhas	dw	0
-	debug		db 'caralho', 0
+	tensao		dw  3 dup (-1)
+	temp_string	db  10 dup (0)
+	modo_parse	db	0
 
 		.code
 		.startup
@@ -27,12 +37,21 @@
 
 		; Enquanto nao for EOF
 		main_loop:
+			; Testa fim do arquivo
 			call getChar
 			cmp ax, 0
 			je EOF
-			call moveBack
+			cmp dl, 'f'
+			je EOF
+			cmp dl, 'F'
+			je EOF
+			call moveBack ; Retorna um caractere
+			
 			; Le linha
 			call read_line
+			call parse_line
+
+			; Testa impressao
 			lea bx, string
 			call printf_s
 			jmp main_loop
@@ -208,5 +227,30 @@ moveBack proc	near
 	int 21h
 	ret
 moveBack endp
+
+; Interpreta a linha salva na variavel string para validacao
+parse_line proc	near
+	mov index, 0
+
+	loop_parse:
+		mov bx, index
+		add bx, offset string
+		cmp [bx], AGUARDA_NUMERO
+		jne parse1
+		jmp next_parse
+		;call verif_numero
+		parse1:
+		cmp [bx], AGUARDA_NOV
+		jne next_parse
+		;call compoe_numero
+
+		next_parse:
+
+
+	ret
+parse_line endp
+
+
+
 
 		end
