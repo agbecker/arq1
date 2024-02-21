@@ -404,9 +404,21 @@ espera_virgula proc near
 
 espera_virgula endp
 
-
+; Espera fim da linha. Qualquer coisa além de espaço em branco é inválida
 espera_endl proc near
+	mov ax, [bx]
+	cmp al, SPACE
+	je endl_space
+	cmp al, TAB
+	je endl_space
 
+	mov arquivo_valido, 0
+
+	lea bx, msg_inv_file
+	call printf_s
+	ret
+
+	endl_space:
 	ret
 
 espera_endl endp
