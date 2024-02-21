@@ -45,6 +45,10 @@
 
 	num_regular	dw	0
 	num_baixa	dw 	0
+
+	sw_n	dw	0 							; Usada dentro da funcao sprintf_w
+	sw_f	db	0							; Usada dentro da funcao sprintf_w
+	sw_m	dw	0							; Usada dentro da funcao sprintf_w
 	
 
 	; Mensagens
