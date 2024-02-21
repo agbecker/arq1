@@ -35,6 +35,7 @@
 	modo_parse	db	0
 	volt_index  dw 	0
 	arquivo_valido 	db 	1
+	linha_valida 	db 	1
 
 	vmin		dw	0
 	vmax 		dw 	0
@@ -46,6 +47,9 @@
 
 	; Mensagens
 	msg_inv_file	db	'Arquivo com erro', CR, LF, 0
+	msg_linha_1		db	'Linha ', 0
+	msg_linha_2		db	'invalida: ', 0
+	line_break		db 	CR, LF, 0
 
 		.code
 		.startup
@@ -66,6 +70,7 @@
 
 		; Enquanto nao for EOF
 		main_loop:
+			inc num_linhas
 			; Testa fim do arquivo
 			call getChar
 			cmp ax, 0
@@ -78,6 +83,7 @@
 			
 			; Le linha
 			call read_line
+			mov linha_valida, 1
 			call parse_line
 
 			; Testa impressao
@@ -224,7 +230,7 @@ read_line proc	near
 		; move o ponteiro de arquivo uma posição para trás
 		call moveBack
 	EOL2:
-		inc num_linhas
+		
 		mov bx, index
 		add bx, offset string
 		mov [bx], 0
@@ -329,6 +335,7 @@ verif_numero proc near
 
 	verif_invalido:
 	mov arquivo_valido, 0
+	mov linha_valida, 0
 
 	lea bx, msg_inv_file
 	call printf_s
@@ -386,6 +393,7 @@ compoe_numero proc near
 
 	compoe_invalido:
 	mov arquivo_valido, 0
+	mov linha_valida, 0
 
 	lea bx, msg_inv_file
 	call printf_s
@@ -424,6 +432,7 @@ espera_virgula proc near
 
 	virgula_invalido:
 	mov arquivo_valido, 0
+	mov linha_valida, 0
 
 	lea bx, msg_inv_file
 	call printf_s
@@ -440,6 +449,7 @@ espera_endl proc near
 	je endl_space
 
 	mov arquivo_valido, 0
+	mov linha_valida, 0
 
 	lea bx, msg_inv_file
 	call printf_s
@@ -490,6 +500,7 @@ valida_tensoes proc near
 
 		tensao_invalida:
 		mov arquivo_valido, 0
+		mov linha_valida, 0
 		ret
 
 	end_valida_tensoes:
@@ -507,6 +518,18 @@ valida_tensoes proc near
 
 valida_tensoes endp
 
+; Imprime que há erro na última linhda lida
+informa_linha_errada proc near
+	lea bx, msg_linha_1
+	call printf_s
+	lea bx, msg_linha_2
+	call printf_s
+	lea bx, string
+	call printf_s
+	lea bx, line_break
+	call printf_s
 
+	ret
+informa_linha_errada endp
 
 		end
