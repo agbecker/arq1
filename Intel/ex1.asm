@@ -90,6 +90,7 @@
 			call read_line
 			mov linha_valida, 1
 			call parse_line
+			call valida_tensoes
 
 			; Verifica validade da linha
 			cmp linha_valida, 1
@@ -265,7 +266,6 @@ read_line proc	near
 		jmp read_line_end
 
 	read_line_end:
-	call valida_tensoes
 	ret
 read_line endp	
 
@@ -340,8 +340,11 @@ verif_numero proc near
 	cmp al, '9'
 	ja verif_invalido
 	; Se for um digito numerico
-	mov tensao, ax
-	sub tensao, '0'
+	mov ah, 0
+	mov bx, volt_index
+	add bx, offset tensao
+	mov [bx], ax
+	sub [bx], '0'
 	mov modo_parse, AGUARDA_NOV
 	ret
 
@@ -381,6 +384,7 @@ compoe_numero proc near
 	mov cx, 10
 	mul cx
 	add al, temp_char
+	;mov ah, 0
 	mov [bx], ax
 	ret
 
@@ -466,7 +470,7 @@ espera_endl endp
 ; Verifica que as três tensões medidas são válidas,
 ; e se são adequadas ou baixas
 valida_tensoes proc near
-	mov dx, 0 ; DX será usado para anotar se as tensões estão na faixa
+	mov ax, 0 ; DX será usado para anotar se as tensões estão na faixa
 	mov volt_index, -2
 
 	loop_valida_tensoes:
@@ -474,19 +478,21 @@ valida_tensoes proc near
 		cmp volt_index, 6
 		je end_valida_tensoes
 
-		shl dx, 1
+
+
+		shl ax, 1
 		mov bx, volt_index
 		add bx, offset tensao
 		; Se for invalida
 		cmp [bx], v_valida_min
-		jb tensao_invalida
-		cmp[bx], v_valida_max
-		ja tensao_invalida
+		jl tensao_invalida
+		cmp [bx], v_valida_max
+		jg tensao_invalida
 
 		; Se for baixa
 		cmp [bx], ref_baixa
 		ja loop_vt1
-		inc dl
+		inc al
 		jmp loop_valida_tensoes
 
 		; Se for regular
@@ -497,12 +503,14 @@ valida_tensoes proc near
 		mov cx, vmax
 		cmp [bx], cx
 		ja loop_valida_tensoes
-		inc dh
+		inc ah
 		jmp loop_valida_tensoes
 
 		tensao_invalida:
 		mov arquivo_valido, 0
 		mov linha_valida, 0
+
+		
 		ret
 
 	end_valida_tensoes:
