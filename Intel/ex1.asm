@@ -367,9 +367,39 @@ compoe_numero proc near
 
 compoe_numero endp
 
-
+; Aguarda até achar uma vírgula
 espera_virgula proc near
+	mov ax, [bx]
+	; Caso seja espaco branco apenas prossegue
+	cmp al, TAB
+	je virgula_space
+	cmp al, SPACE
+	je virgula_space
 
+	; Se nao for virgula, é invalido
+	cmp al, ','
+	jne virgula_invalido
+
+	; Se já tiver dado valor às três tensões
+	cmp volt_index, 4
+	je espera_virgula2
+	; Senão
+	add volt_index, 2
+	mov modo_parse, AGUARDA_NUMERO
+	ret
+
+	espera_virgula2:
+	mov modo_parse, AGUARDA_FIM_LINHA
+	ret
+
+	virgula_space:
+	ret
+
+	virgula_invalido:
+	mov arquivo_valido, 0
+
+	lea bx, msg_inv_file
+	call printf_s
 	ret
 
 espera_virgula endp
