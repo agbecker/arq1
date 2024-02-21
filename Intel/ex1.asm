@@ -36,8 +36,8 @@
 	volt_index  dw 	0
 	arquivo_valido 	db 	1
 
-	vmin		dw	0
-	vmax 		dw 	0
+	v_min		dw	0
+	v_max 		dw 	0
 	v_ref		dw  127
 
 	num_regular	dw	0
@@ -477,10 +477,11 @@ valida_tensoes proc near
 		inc dl
 		jmp loop_valida_tensoes
 
+		; Se for regular
 		loop_vt1:
-		cmp [bx], vmin
+		cmp [bx], v_min
 		jb loop_valida_tensoes
-		cmp [bx], vmax
+		cmp [bx], v_max
 		ja loop_valida_tensoes
 		inc dh
 		jmp loop_valida_tensoes
