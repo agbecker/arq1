@@ -53,7 +53,7 @@
 
 	; Mensagens
 	msg_linha_1		db	'Linha ', 0
-	msg_linha_2		db	'invalida: ', 0
+	msg_linha_2		db	' invalida: ', 0
 	line_break		db 	CR, LF, 0
 
 		.code
@@ -528,6 +528,7 @@ informa_linha_errada proc near
 	mov ax, num_linhas
 	lea bx, aux_str
 	call sprintf_w
+	lea bx, aux_str
 	call printf_s
 
 	lea bx, msg_linha_2
