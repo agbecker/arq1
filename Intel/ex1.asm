@@ -175,8 +175,8 @@ read_line proc	near
 		call getChar
 		
 		;; Verifica final de arquivo
-		;cmp ax, 0
-		;je EOF
+		cmp ax, 0
+		je EOL
 
 		; Verifica final de linha
 		cmp dl, CR
