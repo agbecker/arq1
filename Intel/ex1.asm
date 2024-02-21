@@ -285,6 +285,7 @@ moveBack endp
 parse_line proc	near
 	mov index, 0
 	mov modo_parse, AGUARDA_NUMERO
+	mov volt_index, 0
 
 	loop_parse:
 		mov bx, index
@@ -339,7 +340,6 @@ verif_numero proc near
 	cmp al, '9'
 	ja verif_invalido
 	; Se for um digito numerico
-	mov volt_index, 0
 	mov tensao, ax
 	sub tensao, '0'
 	mov modo_parse, AGUARDA_NOV
