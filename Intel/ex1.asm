@@ -256,8 +256,11 @@ parse_line proc	near
 
 		next_parse:
 		inc index
+		cmp index, string_len
+		je end_parse
+		jmp loop_parse
 
-
+	end_parse:
 	ret
 parse_line endp
 
@@ -286,7 +289,7 @@ verif_numero proc near
 	verif_invalido:
 	mov arquivo_valido, 0
 
-	mov bx, msg_inv_file
+	lea bx, msg_inv_file
 	call printf_s
 	ret
 
