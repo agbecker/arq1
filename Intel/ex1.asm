@@ -399,8 +399,6 @@ compoe_numero proc near
 	mov arquivo_valido, 0
 	mov linha_valida, 0
 
-	lea bx, msg_inv_file
-	call printf_s
 	ret
 	
 
@@ -438,8 +436,6 @@ espera_virgula proc near
 	mov arquivo_valido, 0
 	mov linha_valida, 0
 
-	lea bx, msg_inv_file
-	call printf_s
 	ret
 
 espera_virgula endp
@@ -453,11 +449,7 @@ espera_endl proc near
 	je endl_space
 
 	mov arquivo_valido, 0
-	mov linha_valida, 0
-
-	lea bx, msg_inv_file
-	call printf_s
-	ret
+	mov linha_valida, 0s
 
 	endl_space:
 	ret
