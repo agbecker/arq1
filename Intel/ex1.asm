@@ -46,7 +46,6 @@
 	
 
 	; Mensagens
-	msg_inv_file	db	'Arquivo com erro', CR, LF, 0
 	msg_linha_1		db	'Linha ', 0
 	msg_linha_2		db	'invalida: ', 0
 	line_break		db 	CR, LF, 0
@@ -344,8 +343,6 @@ verif_numero proc near
 	mov arquivo_valido, 0
 	mov linha_valida, 0
 
-	lea bx, msg_inv_file
-	call printf_s
 	ret
 
 verif_numero endp
