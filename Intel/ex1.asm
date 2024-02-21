@@ -176,7 +176,7 @@ read_line proc	near
 		
 		;; Verifica final de arquivo
 		cmp ax, 0
-		je EOL
+		je EOF
 
 		; Verifica final de linha
 		cmp dl, CR
@@ -217,11 +217,11 @@ read_line proc	near
 		mov string_len, ax
 		ret
 
-	;EOF:
-	;	mov bx, index
-	;	add bx, offset string
-	;	mov [bx], 0
-	;	ret
+	EOF:
+		mov bx, index
+		add bx, offset string
+		mov [bx], 0
+		ret
 read_line endp	
 
 ; Retorna o ponteiro de arquivo em um caractere
