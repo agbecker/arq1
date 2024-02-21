@@ -18,12 +18,15 @@
 	handle_in	dw 	0
 	handle_out	dw	0
 	string 		db	50 dup (0)
+	string_len	dw	0
 	gotten_char db 	0
 	index		dw  0
 	num_linhas	dw	0
 	tensao		dw  3 dup (-1)
 	temp_string	db  10 dup (0)
 	modo_parse	db	0
+	volt_index  db 	0
+	arquivo_valido 	db 	1
 
 		.code
 		.startup
@@ -207,6 +210,7 @@ read_line proc	near
 		inc bx
 		mov [bx], 0
 
+		mov string_len, index
 		ret
 
 	;EOF:
@@ -237,20 +241,47 @@ parse_line proc	near
 		add bx, offset string
 		cmp [bx], AGUARDA_NUMERO
 		jne parse1
+		call verif_numero
 		jmp next_parse
-		;call verif_numero
 		parse1:
 		cmp [bx], AGUARDA_NOV
 		jne next_parse
 		;call compoe_numero
 
 		next_parse:
+		inc index
 
 
 	ret
 parse_line endp
 
+verif_numero proc near
+	cpm [bx], SPACE
+	jne verif1
+	ret
 
+	verif1:
+	cpm [bx], TAB
+	jne verif2
+	ret
 
+	verif2:
+	cmp [bx], '0'
+	jb verif_invalido
+	cmp [bx], '9'
+	ja verif_invalido
+	; Se for um digito numerico
+	mov volt_index, 0
+	mov tensao, [bx]
+	sub tensao, '0'
+	ret
+
+	verif_invalido:
+	mov arquivo_valido, 0
+	ret
+
+	
+
+verif_numero endp
 
 		end
