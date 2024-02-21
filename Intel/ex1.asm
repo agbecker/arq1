@@ -18,7 +18,7 @@
 	v_valida_min	equ	0
 	v_valida_max	equ	499
 	delta_v			equ 10
-	ref_baixa
+	ref_baixa		equ 10
 
 	; Variáveis
 	file_in		db	'in1.txt', 0
@@ -53,9 +53,10 @@
 		mov num_linhas, 0
 		mov v_ref, 127
 
-		mov vmin, v_ref
+		mov bx, v_ref
+		mov vmin, bx
 		sub vmin, delta_v
-		mov vmax, v_ref
+		mov vmax, bx
 		add vmax, delta_v
 
 		lea dx, file_in
@@ -461,7 +462,7 @@ valida_tensoes proc near
 		cmp volt_index, 6
 		je end_valida_tensoes
 
-		asl dx
+		shl dx, 1
 		mov bx, volt_index
 		add bx, offset tensao
 		; Se for invalida
