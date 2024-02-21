@@ -23,11 +23,10 @@
 	index		dw  0
 	num_linhas	dw	0
 	tensao		dw  3 dup (-1)
-	temp_string	db  10 dup (0)
+	temp_char	db  0
 	modo_parse	db	0
 	volt_index  db 	0
 	arquivo_valido 	db 	1
-	char		db	0
 
 	; Mensagens
 	msg_inv_file	db	'Arquivo com erro', CR, LF, 0
@@ -252,7 +251,7 @@ parse_line proc	near
 		parse1:
 		cmp modo_parse, AGUARDA_NOV
 		jne next_parse
-		;call compoe_numero
+		call compoe_numero
 
 		next_parse:
 		inc index
@@ -265,6 +264,8 @@ parse_line proc	near
 	ret
 parse_line endp
 
+; Ignora espaços em branco até achar dígito numérico.
+; Se achar outro caractere, a linha tem erro
 verif_numero proc near
 	mov ax, [bx]
 	cmp al, SPACE
@@ -285,6 +286,7 @@ verif_numero proc near
 	mov volt_index, 0
 	mov tensao, ax
 	sub tensao, '0'
+	mov modo_parse, AGUARDA_NOV
 	ret
 
 	verif_invalido:
@@ -294,8 +296,64 @@ verif_numero proc near
 	call printf_s
 	ret
 
+verif_numero endp
+
+compoe_numero proc near
+	mov ax, [bx]
+	; Caso seja espaco branco, o proximo deve ser virgula
+	comp al, TAB
+	je compoe_space
+	comp al, SPACE
+	je compoe_space
+
+	; Caso seja virgula, encerra o numero
+	comp al, ','
+	je compoe_virgula
+
+	; Caso não seja número, é inválido
+	cmp al, '0'
+	jb compoe_invalido
+	cmp al, '9'
+	ja compoe_invalido
+
+	; Caso seja numero, adiciona à tensão atual
+	mov temp_char, al
+	sub temp_char, '0'
+	mov bx, volt_index
+	add bx, offset tensao
+	mov ax, [bx]
+	mul 10
+	add al, temp_char
+	ret
+
+	compoe_space:
+	mov modo_parse, AGUARDA_VIRGULA
+	ret
+
+	compoe_virgula:
+	; Se já tiver dado valor às três tensões
+	cmp volt_index, 4
+	je compoe_virgula2
+	; Senão
+	add volt_index, 2
+	mov modo_parse, AGUARDA_NUMERO
+	ret
+
+	compoe_virgula2:
+	mov modo_parse, AGUARDA_FIM_LINHA
+	ret
+
+	compoe_invalido:
+	mov arquivo_valido, 0
+
+	lea bx, msg_inv_file
+	call printf_s
+	ret
 	
 
-verif_numero endp
+compoe_numero endp
+
+
+
 
 		end
