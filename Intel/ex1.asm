@@ -19,6 +19,7 @@
 	v_valida_max	equ	499
 	delta_v			equ 10
 	ref_baixa		equ 10
+	aux_len			equ 10
 
 	; Variáveis
 	file_in		db	'in1.txt', 0
@@ -36,6 +37,7 @@
 	volt_index  dw 	0
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
+	aux_str		db	aux_len dup (0)
 
 	vmin		dw	0
 	vmax 		dw 	0
@@ -518,14 +520,97 @@ valida_tensoes endp
 informa_linha_errada proc near
 	lea bx, msg_linha_1
 	call printf_s
+
+	mov ax, num_linhas
+	lea bx, aux_str
+	call sprintf_w
+	call printf_s
+
 	lea bx, msg_linha_2
 	call printf_s
 	lea bx, string
 	call printf_s
-	lea bx, line_break
-	call printf_s
 
 	ret
 informa_linha_errada endp
+
+; sprintf_w: Inteiro (ax) String (bx) -> void
+; Obj.: dado um numero e uma string, transforma o numero em ascii e salva na string dada, quase um itoa()
+; Ex.:
+; mov ax, 3141
+; lea bx, String (em que String e db 10 dup (?)) (o dup e pra ele saber que e pra reservar 100 bytes e o (?) diz que pode deixar o lixo de memoria)
+; call sprintf_w
+; -> string recebe "3141",0
+sprintf_w	proc	near
+
+;void sprintf_w(char *string, WORD n) {
+	mov		sw_n,ax
+
+;	k=5;
+	mov		cx,5
+	
+;	m=10000;
+	mov		sw_m,10000
+	
+;	f=0;
+	mov		sw_f,0
+	
+;	do {
+sw_do:
+
+;		quociente = n / m : resto = n % m;	// Usar instru��o DIV
+	mov		dx,0
+	mov		ax,sw_n
+	div		sw_m
+	
+;		if (quociente || f) {
+;			*string++ = quociente+'0'
+;			f = 1;
+;		}
+	cmp		al,0
+	jne		sw_store
+	cmp		sw_f,0
+	je		sw_continue
+sw_store:
+	add		al,'0'
+	mov		[bx],al
+	inc		bx
+	
+	mov		sw_f,1
+sw_continue:
+	
+;		n = resto;
+	mov		sw_n,dx
+	
+;		m = m/10;
+	mov		dx,0
+	mov		ax,sw_m
+	mov		bp,10
+	div		bp
+	mov		sw_m,ax
+	
+;		--k;
+	dec		cx
+	
+;	} while(k);
+	cmp		cx,0
+	jnz		sw_do
+
+;	if (!f)
+;		*string++ = '0';
+	cmp		sw_f,0
+	jnz		sw_continua2
+	mov		[bx],'0'
+	inc		bx
+sw_continua2:
+
+
+;	*string = '\0';
+	mov		byte ptr[bx],0
+		
+;}
+	ret
+		
+sprintf_w	endp
 
 		end
