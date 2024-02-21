@@ -210,7 +210,8 @@ read_line proc	near
 		inc bx
 		mov [bx], 0
 
-		mov string_len, index
+		mov ax, index
+		mov string_len, ax
 		ret
 
 	;EOF:
