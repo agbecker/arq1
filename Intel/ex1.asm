@@ -2,6 +2,7 @@
 		.stack
 
 		.data
+	; Chars especiais
 	CR 			equ	0Dh
 	LF			equ 0Ah
 	SPACE		equ	20h
@@ -13,6 +14,13 @@
 	AGUARDA_VIRGULA equ 2
 	AGUARDA_FIM_LINHA	equ	3
 
+	; Constantes
+	v_valida_min	equ	0
+	v_valida_max	equ	499
+	delta_v			equ 10
+	ref_baixa
+
+	; Variáveis
 	file_in		db	'in1.txt', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
@@ -28,6 +36,14 @@
 	volt_index  dw 	0
 	arquivo_valido 	db 	1
 
+	vmin		dw	0
+	vmax 		dw 	0
+	v_ref		dw  127
+
+	num_regular	dw	0
+	num_baixa	dw 	0
+	
+
 	; Mensagens
 	msg_inv_file	db	'Arquivo com erro', CR, LF, 0
 
@@ -35,6 +51,12 @@
 		.startup
 		; Inicializacoes
 		mov num_linhas, 0
+		mov v_ref, 127
+
+		mov vmin, v_ref
+		sub vmin, delta_v
+		mov vmax, v_ref
+		add vmax, delta_v
 
 		lea dx, file_in
 		call fopen
@@ -215,13 +237,17 @@ read_line proc	near
 
 		mov ax, index
 		mov string_len, ax
-		ret
+		jmp read_line_end
 
 	EOF_read:
 		mov bx, index
 		add bx, offset string
 		mov [bx], 0
-		ret
+		jmp read_line_end
+
+	read_line_end:
+	call valida_tensoes
+	ret
 read_line endp	
 
 ; Retorna o ponteiro de arquivo em um caractere
@@ -422,5 +448,61 @@ espera_endl proc near
 	ret
 
 espera_endl endp
+
+
+; Verifica que as três tensões medidas são válidas,
+; e se são adequadas ou baixas
+valida_tensoes proc near
+	mov dx, 0 ; DX será usado para anotar se as tensões estão na faixa
+	mov volt_index, -2
+
+	loop_valida_tensoes:
+		add volt_index, 2
+		cmp volt_index, 6
+		je end_valida_tensoes
+
+		asl dx
+		mov bx, volt_index
+		add bx, offset tensao
+		; Se for invalida
+		cmp [bx], v_valida_min
+		jb tensao_invalida
+		cmp[bx], v_valida_max
+		ja tensao_invalida
+
+		; Se for baixa
+		cmp [bx], ref_baixa
+		ja loop_vt1
+		inc dl
+		jmp loop_valida_tensoes
+
+		loop_vt1:
+		cmp [bx], vmin
+		jb loop_valida_tensoes
+		cmp [bx], vmax
+		ja loop_valida_tensoes
+		inc dh
+		jmp loop_valida_tensoes
+
+		tensao_invalida:
+		mov arquivo_valido, 0
+		ret
+
+	end_valida_tensoes:
+		cmp dh, 7
+		jne end_vt1
+		inc num_regular
+
+		end_vt1:
+		cmp dl, 7
+		jne end_vt2
+		inc num_baixa
+
+		end_vt2:
+		ret
+
+valida_tensoes endp
+
+
 
 		end
