@@ -22,7 +22,7 @@
 	aux_len			equ 10
 
 	; Variáveis
-	file_in		db	'in8.txt', 0
+	file_in		db	'a.in', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
 	handle_out	dw	0
@@ -123,6 +123,20 @@
 			mov ax, num_linhas
 			call calcula_tempo
 			lea bx, msg_tempo_total
+			call printf_s
+			lea bx, tempo
+			call printf_s
+
+			mov ax, num_regular
+			call calcula_tempo
+			lea bx, msg_tempo_regular
+			call printf_s
+			lea bx, tempo
+			call printf_s
+
+			mov ax, num_baixa
+			call calcula_tempo
+			lea bx, msg_tempo_baixo
 			call printf_s
 			lea bx, tempo
 			call printf_s
@@ -722,10 +736,14 @@ calcula_tempo	proc 	near
 	inc bx
 	escreve_seg1:
 	call sprintf_w
-	;add index, 2
-	;mov bx, index
-	;add bx, offset tempo
-	;mov [bx], 0
+	mov bx, index
+	add bx, offset tempo
+	inc index
+	mov [bx], CR
+	inc index
+	mov [bx], LF
+	inc index
+	mov [bx], 0
 
 	ret	
 
