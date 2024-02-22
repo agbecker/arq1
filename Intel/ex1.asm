@@ -78,8 +78,6 @@
 
 		lea dx, file_in
 		call fopen
-		lea dx, file_out
-		call fcreate
 
 		; Enquanto nao for EOF
 		main_loop:
@@ -133,11 +131,6 @@
 
 ; fopen: String (dx) -> File* (handle_in) Boolean (CF)		(Passa o File* para o ax tambem, mas por algum motivo ele move pro bx)
 ; Obj.: Dado o caminho para um arquivo, devolve o ponteiro desse arquivo e define CF como 0 se o processo deu certo
-; Ex.:
-; lea dx, fileName		(em que fileName eh "temaDeCasa/feet/feet1.png",0) (Talvez a orientacao das barras varie com o sistema operacional, na duvida coloca tudo dentro de WORK pra poder usar so o nome do arquivo)
-; call fopen
-; -> bx recebe a imagem e CF (carry flag) nao ativa
-; ou -> bx recebe lixo e CF ativa
 fopen	proc	near
 	mov		al,0
 	mov		ah,3dh
@@ -148,11 +141,6 @@ fopen	endp
 
 ; fcreate: String (dx) -> File* (bx) Boolean (CF)
 ; Obj.: Dado o caminho para um arquivo, cria um novo arquivo com dado nome em tal caminho e devolve seu ponteiro, define CF como 0 se o processo deu certo
-; Ex.:
-; lea dx, fileName		(em que fileName eh "fatos/porQueChicoEhOMelhor.txt",0) (Talvez a orientacao das barras varie com o sistema operacional, na duvida coloca tudo dentro de WORK pra poder usar so o nome do arquivo)
-; call fcreate
-; -> bx recebe o txt e CF (carry flag) nao ativa
-; ou -> bx recebe lixo e CF ativa
 fcreate	proc	near
 	mov		cx,0
 	mov		ah,3ch
@@ -163,11 +151,6 @@ fcreate	endp
 
 ; fclose: File* (bx) -> Boolean (CF)
 ; Obj.: evitar um memory leak fechando o arquivo
-; Ex.:
-; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
-; call fclose
-; -> Se deu certo, CF == 0
-; (Recomendo zerar o filePtr pra voce nao fazer merda)
 fclose	proc	near
 	mov		ah,3eh
 	int		21h
@@ -176,12 +159,6 @@ fclose	endp
 
 ; printf_s: String (bx) -> void
 ; Obj.: dado uma String, escreve a string na tela
-; Ex.:
-; lea bx, String1 (em que String 1 é db "Java melhor linguagem",CR,LF,0)
-; call printf_s
-; -> Imprime o fato na tela e quebra linha
-; (Nao sei o que acontece se colocar so o LF ou so o CR, da uma
-; brincada ai pra descobrir)
 printf_s	proc	near
 
 ;	While (*s!='\0') {
@@ -209,11 +186,6 @@ printf_s	endp
 
 ; getChar: File* (bx) -> Char (dl) Inteiro (AX) Boolean (CF)
 ; Obj.: Dado um arquivo, devolve um caractere, a posicao do cursor e define CF como 0 se a leitura deu certo (diferente do getchar() do C, mais pra um getc(FILE*))
-; Ex.:
-; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
-; call getChar
-; -> char em dl e cursor em AX se CF == 0
-; senao, deu ruim
 getChar	proc	near
 	mov		bx, handle_in
 	mov		ah, 3fh
@@ -565,11 +537,6 @@ informa_linha_errada endp
 
 ; sprintf_w: Inteiro (ax) String (bx) -> void
 ; Obj.: dado um numero e uma string, transforma o numero em ascii e salva na string dada, quase um itoa()
-; Ex.:
-; mov ax, 3141
-; lea bx, String (em que String e db 10 dup (?)) (o dup e pra ele saber que e pra reservar 100 bytes e o (?) diz que pode deixar o lixo de memoria)
-; call sprintf_w
-; -> string recebe "3141",0
 sprintf_w	proc	near
 
 ;void sprintf_w(char *string, WORD n) {
@@ -727,10 +694,6 @@ calcula_tempo	endp
 	
 ; setChar: Char (dl) -> Inteiro (ax) Boolean (CF)
 ; Obj.: Dado um arquivo e um caractere, escreve esse caractere no arquivo e devolve a posicao do cursor e define CF como 0 se a leitura deu certo
-; Ex.:
-; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
-; call setChar
-; -> posicao do cursor em AX e CF == 0 se deu certo
 setChar	proc	near
 	mov 	bx, handle_out
 	mov		ah,40h
@@ -764,6 +727,11 @@ write_to_file endp
 ; Também escreve informações relevantes na tela
 escreve_relatorio	proc	near
 
+	; Cria arquivo
+	lea dx, file_out
+	call fcreate
+
+	; Imprime na tela
 	mov ax, num_linhas
 	call calcula_tempo
 	lea bx, msg_tempo_total
@@ -773,6 +741,7 @@ escreve_relatorio	proc	near
 	lea bx, line_break
 	call printf_s
 	
+	; Escreve no arquivo
 	mov ax, num_linhas
 	call calcula_tempo
 	lea bx, msg_tempo_total
