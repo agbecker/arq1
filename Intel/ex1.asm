@@ -113,6 +113,7 @@
 			call fclose
 			mov bx, handle_out
 			call fclose
+
 			call calcula_tempo
 			lea bx, tempo
 			call printf_s
@@ -654,55 +655,55 @@ calcula_tempo	proc 	near
 	mov segundos, bx
 
 	; Escreve a string
-	mov index, 0
-	cmp horas, 0
-	je escreve_minuto
-	mov ax, horas
-	mov index, bx
-	add bx, offset tempo
+	;mov index, 0
+	;cmp horas, 0
+	;je escreve_minuto
+	;mov ax, horas
+	;mov index, bx
+	;add bx, offset tempo
 	; Coloca 0 no começo, se necessario
-	cmp horas, 10
-	jnb escreve_hora1
-	mov [bx], '0'
-	inc bx
-	escreve_hora1:
-	call sprintf_w
-	add index, 2
-	mov bx, index
-	add bx, offset tempo
-	mov [bx], ':'
-	inc index
+	;cmp horas, 10
+	;jnb escreve_hora1
+	;mov [bx], '0'
+	;inc bx
+	;escreve_hora1:
+	;call sprintf_w
+	;add index, 2
+	;mov bx, index
+	;add bx, offset tempo
+	;mov [bx], ':'
+	;inc index
 
-	escreve_minuto:
-	cmp minutos, 0
-	je escreve_segundo
-	mov ax, minutos
-	mov index, bx
-	add bx, offset tempo
+	;escreve_minuto:
+	;cmp minutos, 0
+	;je escreve_segundo
+	;mov ax, minutos
+	;mov index, bx
+	;add bx, offset tempo
 	; Coloca 0 no começo, se necessario
-	cmp minutos, 10
-	jnb escreve_min1
-	mov [bx], '0'
-	inc bx
-	escreve_min1:
-	call sprintf_w
-	add index, 2
-	mov bx, index
-	add bx, offset tempo
-	mov [bx], ':'
-	inc index
+	;cmp minutos, 10
+	;jnb escreve_min1
+	;mov [bx], '0'
+	;inc bx
+	;escreve_min1:
+	;call sprintf_w
+	;add index, 2
+	;mov bx, index
+	;add bx, offset tempo
+	;mov [bx], ':'
+	;inc index
 
-	escreve_segundo:
-	mov ax, segundos
-	mov index, bx
-	add bx, offset tempo
+	;escreve_segundo:
+	;mov ax, segundos
+	;mov index, bx
+	;add bx, offset tempo
 	; Coloca 0 no começo, se necessario
-	cmp segundos, 10
-	jnb escreve_seg1
-	mov [bx], '0'
-	inc bx
-	escreve_seg1:
-	call sprintf_w
+	;cmp segundos, 10
+	;jnb escreve_seg1
+	;mov [bx], '0'
+	;inc bx
+	;escreve_seg1:
+	;call sprintf_w
 	;add index, 2
 	;mov bx, index
 	;add bx, offset tempo
