@@ -654,7 +654,9 @@ calcula_tempo	proc 	near
 
 	mov cx, 60
 	div cx
+	mov ah, 0
 	div cx
+	mov ah, 0
 	mov horas, ax
 	mul cx
 	mul cx
@@ -662,6 +664,7 @@ calcula_tempo	proc 	near
 	mov ax, bx
 	mov dx, 0
 	div cx
+	mov ah, 0
 	mov minutos, ax
 	mul cx
 	sub bx, ax
