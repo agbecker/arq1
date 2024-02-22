@@ -114,6 +114,7 @@
 			mov bx, handle_out
 			call fclose
 
+			mov ax, num_linhas
 			call calcula_tempo
 			lea bx, tempo
 			call printf_s
@@ -644,15 +645,15 @@ calcula_tempo	proc 	near
 	mov cx, 3600
 	div cx
 	mov horas, ax
-	mul cx
-	sub bx, ax
-	mov ax, bx
-	mov cx, 60
-	div cx
-	mov minutos, ax
-	mul cx
-	sub bx, ax
-	mov segundos, bx
+	;mul cx
+	;sub bx, ax
+	;mov ax, bx
+	;mov cx, 60
+	;div cx
+	;mov minutos, ax
+	;mul cx
+	;sub bx, ax
+	;mov segundos, bx
 
 	; Escreve a string
 	;mov index, 0
