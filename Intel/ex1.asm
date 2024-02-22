@@ -653,20 +653,20 @@ calcula_tempo	proc 	near
 	mov bx, ax ; copia ax para bx
 
 	mov cx, 60
-	div cx
+	div cl
 	mov ah, 0
-	div cx
+	div cl
 	mov ah, 0
 	mov horas, ax
-	mul cx
-	mul cx
+	mul cl
+	mul cl
 	sub bx, ax
 	mov ax, bx
 	mov dx, 0
-	div cx
+	div cl
 	mov ah, 0
 	mov minutos, ax
-	mul cx
+	mul cl
 	sub bx, ax
 	mov segundos, bx
 
