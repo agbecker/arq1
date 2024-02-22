@@ -54,6 +54,9 @@
 	sw_f	db	0							; Usada dentro da funcao sprintf_w
 	sw_m	dw	0							; Usada dentro da funcao sprintf_w
 	FileBuffer	db 	0
+
+	cmdline		db	40 dup (0)
+	cmd_len		dw	0
 	
 
 	; Mensagens
@@ -63,9 +66,31 @@
 	msg_tempo_total	db	'Tempo total de medicoes: ', 0
 	msg_tempo_regular	db	'Tempo de tensao adequada: ', 0
 	msg_tempo_baixo	db	'Tempo sem tensao: ', 0
+	msg_falta_i		db	'Opcao [-i] sem parametro', 0
+	msg_falta_o		db	'Opcao [-o] sem parametro', 0
+	msg_falta_v		db	'Opcao [-v] sem parametro', 0
+	msg_v_invalido	db	'Parametro da opção [-v] deve ser 127 ou 220', 0
 
 		.code
 		.startup
+		; Le CMD
+		push ds ; Salva as informações de segmentos
+		push es
+		mov ax,ds ; Troca DS com ES para poder usa o REP MOVSB
+		mov bx,es
+		mov ds,bx
+		mov es,ax
+		mov si,80h ; Obtém o tamanho do string da linha de comando e coloca em CX
+		mov ch,0
+		mov cl,[si]
+		mov cmd_len,cx ; Salva o tamanho do string em cmd_len, para uso futuro
+
+		mov si,81h ; Inicializa o ponteiro de origem
+		lea di,CMDLINE ; Inicializa o ponteiro de destino
+		rep movsb
+		pop es ; retorna as informações dos registradores de segmentos
+		pop ds
+
 		; Inicializacoes
 		mov num_linhas, 0
 		mov v_ref, 127
