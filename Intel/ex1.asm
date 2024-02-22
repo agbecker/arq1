@@ -14,12 +14,15 @@
 	AGUARDA_VIRGULA equ 2
 	AGUARDA_FIM_LINHA	equ	3
 
+	AGUARDA_HIFEN	equ	0
+	AGUARDA_PARAM	equ 1
+	LENDO_PARAM		equ 2
+
 	; Constantes
 	v_valida_min	equ	0
 	v_valida_max	equ	499
 	delta_v			equ 10
 	ref_baixa		equ 10
-	aux_len			equ 10
 
 	; Variáveis
 	file_in		db	'a.in', 17 dup (0)
@@ -37,7 +40,8 @@
 	volt_index  dw 	0
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
-	aux_str		db	aux_len dup (0)
+	cmd_valido	db	1
+	aux_str		db	15 dup (0)
 	tempo		db	9 dup (0)
 	horas		dw	0
 	minutos		dw  0
@@ -796,9 +800,73 @@ escreve_relatorio 	endp
 
 ; Interpreta instrucoes da linha de comando
 parse_cmd proc near
-	lea bx, CMDLINE
-	call printf_s
+	mov modo_parse, AGUARDA_HIFEN
+
+	loop_parse_cmd:
+		lea bx, CMDLINE
+
+		mov ax, [bx]
+
+		cmp al, 0
+		je end_parse_cmd
+
+		cmp al, SPACE
+		je next_parse_cmd
+
+		cmp modo_parse, AGUARDA_HIFEN
+		jne cmd1
+		call pega_identificador
+		jmp next_parse_cmd
+
+		cmd1:
+		call le_parametro
+
+		next_parse_cmd:
+		inc bx
+		jmp loop_parse_cmd
+
+		end_parse_cmd:
+
 	ret
 parse_cmd endp
+
+; Lê identificador -i, -o ou -v e passa para DL
+pega_identificador proc near
+	inc bx
+	mov dx, [bx]
+	mov modo_parse, AGUARDA_PARAM
+
+	ret
+pega_identificador endp
+
+; Le valor que segue -i, -o ou -v
+le_parametro proc near
+	cmp modo_parse, AGUARDA_PARAM
+	je modo_aguarda_param
+
+	modo_le_param:
+
+	modo_aguarda_param:
+	mov modo_parse, LENDO_PARAM
+	cmp dl, '-'
+	je erro_param
+	cmp dl, 0
+	je erro_param
+	mov index, 0
+	mov string, dl
+	ret
+
+	erro_param:
+	mov cmd_valido, 0
+	call informa_parametro_invalido
+	ret
+
+le_parametro endp
+
+informa_parametro_invalido proc near
+
+	ret
+
+informa_parametro_invalido endp
 
 		end
