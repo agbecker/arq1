@@ -640,15 +640,6 @@ sprintf_w	endp
 ; Retorna string com o tempo a ser escrito em 'tempo'
 calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
-
-	; Debug
-	lea bx, aux_str
-	call sprintf_w
-	lea bx, aux_str
-	call printf_s
-	lea bx, line_break
-	call printf_s
-
 	mov bx, ax ; copia ax para bx
 
 	; Ax e Bx têm o número total de segundos
