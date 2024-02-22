@@ -107,8 +107,8 @@
 
 			imprime:
 			; Testa impressao
-			lea bx, string
-			call printf_s
+			;lea bx, string
+			;call printf_s
 			jmp main_loop
 
 		EOF:
