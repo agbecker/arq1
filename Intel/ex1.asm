@@ -663,12 +663,12 @@ calcula_tempo	proc 	near
 	mov index, 0
 
 	; Debug
-	jmp escreve_segundo
+	;jmp escreve_segundo
 
 	cmp horas, 0
 	je escreve_minuto
 	mov ax, horas
-	mov index, bx
+	mov bx, index
 	add bx, offset tempo
 	; Coloca 0 no começo, se necessario
 	cmp horas, 10
@@ -687,7 +687,7 @@ calcula_tempo	proc 	near
 	cmp minutos, 0
 	je escreve_segundo
 	mov ax, minutos
-	mov index, bx
+	mov bx, index
 	add bx, offset tempo
 	; Coloca 0 no começo, se necessario
 	cmp minutos, 10
