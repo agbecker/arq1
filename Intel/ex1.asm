@@ -22,7 +22,7 @@
 	aux_len			equ 10
 
 	; Variáveis
-	file_in		db	'in1.txt', 0
+	file_in		db	'in8.txt', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
 	handle_out	dw	0
