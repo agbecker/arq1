@@ -115,9 +115,7 @@
 		EOF:
 			mov bx, handle_in
 			call fclose
-			mov bx, handle_out
-			call fclose
-
+			
 			cmp arquivo_valido, 1
 			jne end_main
 
@@ -147,6 +145,9 @@
 			call printf_s
 			lea bx, line_break
 			call printf_s
+
+			mov bx, handle_out
+			call fclose
 
 		end_main:
 
