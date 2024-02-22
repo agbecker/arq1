@@ -642,18 +642,19 @@ calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
 	mov bx, ax ; copia ax para bx
 
-	mov cx, 3600
+	mov cx, 60
+	div cx
 	div cx
 	mov horas, ax
 	mul cx
-	sub bx, ax
-	mov ax, bx
-	mov cx, 60
-	div cx
-	mov minutos, ax
 	mul cx
 	sub bx, ax
-	mov segundos, bx
+	;mov ax, bx
+	;div cx
+	;mov minutos, ax
+	;mul cx
+	;sub bx, ax
+	;mov segundos, bx
 
 	; Escreve a string
 	;mov index, 0
