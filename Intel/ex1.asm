@@ -736,9 +736,10 @@ calcula_tempo	proc 	near
 	inc bx
 	escreve_seg1:
 	call sprintf_w
+
+	add index, 3
 	mov bx, index
 	add bx, offset tempo
-	inc index
 	mov [bx], CR
 	inc index
 	mov [bx], LF
