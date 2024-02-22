@@ -38,7 +38,7 @@
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
 	aux_str		db	aux_len dup (0)
-	tempo		db	9 dup (0)
+	tempo		db	8 dup (0), CR, LF, 0
 	horas		dw	0
 	minutos		dw  0
 	segundos	dw	0
@@ -113,6 +113,9 @@
 			call fclose
 			mov bx, handle_out
 			call fclose
+			call calcula_tempo
+			lea bx, tempo
+			call printf_s
 
 
 		.exit
@@ -634,6 +637,7 @@ sprintf_w	endp
 ; Recebe segundos decorridos em AX
 ; Retorna string com o tempo a ser escrito em 'tempo'
 calcula_tempo	proc 	near
+	; Calcula horas, minutos e segundos
 	mov bx, ax ; copia ax para bx
 
 	div 3600 
@@ -647,7 +651,60 @@ calcula_tempo	proc 	near
 	sub bx, ax
 	mov segundos, bx
 
+	; Escreve a string
 	mov index, 0
+	cmp horas, 0
+	je escreve_minuto
+	mov ax, horas
+	mov index, bx
+	add bx, offset tempo
+	; Coloca 0 no começo, se necessario
+	cmp horas, 10
+	jnb escreve_hora1
+	mov [bx], '0'
+	inc bx
+	escreve_hora1:
+	call sprintf_w
+	add index, 2
+	mov bx, index
+	add bx, offset tempo
+	mov [bx], ':'
+	inc index
+
+	escreve_minuto:
+	cmp minutos, 0
+	je escreve_segundo
+	mov ax, minutos
+	mov index, bx
+	add bx, offset tempo
+	; Coloca 0 no começo, se necessario
+	cmp minutos, 10
+	jnb escreve_min1
+	mov [bx], '0'
+	inc bx
+	escreve_min1:
+	call sprintf_w
+	add index, 2
+	mov bx, index
+	add bx, offset tempo
+	mov [bx], ':'
+	inc index
+
+	escreve_segundo:
+	mov ax, segundos
+	mov index, bx
+	add bx, offset tempo
+	; Coloca 0 no começo, se necessario
+	cmp segundos, 10
+	jnb escreve_seg1
+	mov [bx], '0'
+	inc bx
+	escreve_seg1:
+	call sprintf_w
+	;add index, 2
+	;mov bx, index
+	;add bx, offset tempo
+	;mov [bx], 0
 
 	ret	
 
