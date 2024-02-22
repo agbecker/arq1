@@ -796,7 +796,8 @@ escreve_relatorio 	endp
 
 ; Interpreta instrucoes da linha de comando
 parse_cmd proc near
-
+	lea bx, CMDLINE
+	call printf_s
 	ret
 parse_cmd endp
 
