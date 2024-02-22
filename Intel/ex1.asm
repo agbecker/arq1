@@ -22,8 +22,8 @@
 	aux_len			equ 10
 
 	; Variáveis
-	file_in		db	'in4.txt', 0
-	file_out	db  'a.out', 0
+	file_in		db	'a.in', 17 dup (0)
+	file_out	db  'a.out', 16 dup (0)
 	handle_in	dw 	0
 	handle_out	dw	0
 	string 		db	50 dup (0)
@@ -90,6 +90,8 @@
 		rep movsb
 		pop es ; retorna as informações dos registradores de segmentos
 		pop ds
+
+		call parse_cmd
 
 		; Inicializacoes
 		mov num_linhas, 0
@@ -791,5 +793,11 @@ escreve_relatorio	proc	near
 
 	ret
 escreve_relatorio 	endp
+
+; Interpreta instrucoes da linha de comando
+parse_cmd proc near
+
+	ret
+parse_cmd endp
 
 		end
