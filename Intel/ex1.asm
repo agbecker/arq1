@@ -123,11 +123,11 @@
 			mov ax, num_linhas
 			call calcula_tempo
 			lea bx, msg_tempo_total
-			call printf_s
+			call write_to_file
 			lea bx, tempo
-			call printf_s
+			call write_to_file
 			lea bx, line_break
-			call printf_s
+			call write_to_file
 
 			mov ax, num_regular
 			call calcula_tempo
@@ -747,6 +747,38 @@ calcula_tempo	proc 	near
 
 calcula_tempo	endp
 	
+; setChar: Char (dl) -> Inteiro (ax) Boolean (CF)
+; Obj.: Dado um arquivo e um caractere, escreve esse caractere no arquivo e devolve a posicao do cursor e define CF como 0 se a leitura deu certo
+; Ex.:
+; mov bx, filePtr	(em que filePtr eh um ponteiro retornado por fopen/fcreate)
+; call setChar
+; -> posicao do cursor em AX e CF == 0 se deu certo
+setChar	proc	near
+	mov 	bx, handle_out
+	mov		ah,40h
+	mov		cx,1
+	mov		FileBuffer,dl
+	lea		dx,FileBuffer
+	int		21h
+	ret
+setChar	endp	
 
+; Escreve string no arquivo de saída
+; Recebe string em Bx
+write_to_file proc near
+	
+	loop_write:
+	mov index, bx
+	cmp [bx], 0
+	je end_write
+	mov dx, [bx]
+	call setChar
+	mov bx, index
+	inc bx
+	jmp loop_write
+
+	end_write:
+	ret
+endp
 
 		end
