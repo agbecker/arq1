@@ -126,7 +126,7 @@
 			call printf_s
 			lea bx, tempo
 			call printf_s
-			lea line_break
+			lea bx, line_break
 			call printf_s
 
 			mov ax, num_regular
@@ -135,7 +135,7 @@
 			call printf_s
 			lea bx, tempo
 			call printf_s
-			lea line_break
+			lea bx, line_break
 			call printf_s
 
 			mov ax, num_baixa
@@ -144,7 +144,7 @@
 			call printf_s
 			lea bx, tempo
 			call printf_s
-			lea line_break
+			lea bx, line_break
 			call printf_s
 
 		end_main:
