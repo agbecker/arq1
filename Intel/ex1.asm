@@ -779,6 +779,6 @@ write_to_file proc near
 
 	end_write:
 	ret
-endp
+write_to_file endp
 
 		end
