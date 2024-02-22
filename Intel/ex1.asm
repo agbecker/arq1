@@ -741,9 +741,9 @@ calcula_tempo	proc 	near
 	mov bx, index
 	add bx, offset tempo
 	mov [bx], CR
-	inc index
+	inc bx
 	mov [bx], LF
-	inc index
+	inc bx
 	mov [bx], 0
 
 	ret	
