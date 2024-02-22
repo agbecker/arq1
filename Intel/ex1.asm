@@ -38,7 +38,7 @@
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
 	aux_str		db	aux_len dup (0)
-	tempo		db	11 dup (0)
+	tempo		db	9 dup (0)
 	horas		dw	0
 	minutos		dw  0
 	segundos	dw	0
@@ -126,6 +126,8 @@
 			call printf_s
 			lea bx, tempo
 			call printf_s
+			lea line_break
+			call printf_s
 
 			mov ax, num_regular
 			call calcula_tempo
@@ -133,12 +135,16 @@
 			call printf_s
 			lea bx, tempo
 			call printf_s
+			lea line_break
+			call printf_s
 
 			mov ax, num_baixa
 			call calcula_tempo
 			lea bx, msg_tempo_baixo
 			call printf_s
 			lea bx, tempo
+			call printf_s
+			lea line_break
 			call printf_s
 
 		end_main:
@@ -736,15 +742,6 @@ calcula_tempo	proc 	near
 	inc bx
 	escreve_seg1:
 	call sprintf_w
-
-	add index, 3
-	mov bx, index
-	add bx, offset tempo
-	mov [bx], CR
-	inc bx
-	mov [bx], LF
-	inc bx
-	mov [bx], 0
 
 	ret	
 
