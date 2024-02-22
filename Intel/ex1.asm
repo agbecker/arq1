@@ -661,6 +661,10 @@ calcula_tempo	proc 	near
 
 	; Escreve a string
 	mov index, 0
+
+	; Debug
+	jmp escreve_segundo
+
 	cmp horas, 0
 	je escreve_minuto
 	mov ax, horas
@@ -702,12 +706,12 @@ calcula_tempo	proc 	near
 	mov ax, segundos
 
 	; Debug
-	lea bx, aux_str
-	call sprintf_w
-	lea bx, aux_str
-	call printf_s
+	;lea bx, aux_str
+	;call sprintf_w
+	;lea bx, aux_str
+	;call printf_s
 
-	mov index, bx
+	mov bx, index
 	add bx, offset tempo
 	; Coloca 0 no começo, se necessario
 	cmp segundos, 10
