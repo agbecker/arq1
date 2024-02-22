@@ -552,12 +552,12 @@ valida_tensoes proc near
 		ret
 
 	end_valida_tensoes:
-		cmp dh, 7
+		cmp ah, 7
 		jne end_vt1
 		inc num_regular
 
 		end_vt1:
-		cmp dl, 7
+		cmp al, 7
 		jne end_vt2
 		inc num_baixa
 
