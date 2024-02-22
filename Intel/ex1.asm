@@ -114,7 +114,7 @@
 			mov bx, handle_out
 			call fclose
 
-			mov ax, num_linhas
+			mov ax, 3725
 			call calcula_tempo
 			lea bx, tempo
 			call printf_s
@@ -640,7 +640,6 @@ sprintf_w	endp
 ; Retorna string com o tempo a ser escrito em 'tempo'
 calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
-	mov dx, 0
 
 	; Debug
 	lea bx, aux_str
@@ -652,23 +651,12 @@ calcula_tempo	proc 	near
 
 	mov bx, ax ; copia ax para bx
 
-	mov cx, 60
-	div cl
-	mov ah, 0
-	div cl
-	mov ah, 0
-	mov horas, ax
-	mul cl
-	mul cl
-	sub bx, ax
-	mov ax, bx
+	; Ax e Bx têm o número total de segundos
 	mov dx, 0
-	div cl
-	mov ah, 0
-	mov minutos, ax
-	mul cl
-	sub bx, ax
-	mov segundos, bx
+	mov cx, 3600
+
+	div cx ; Divide Dx:Ax por 3600
+	mov horas, ax
 
 	; Debug
 	mov ax, horas
