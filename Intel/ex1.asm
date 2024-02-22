@@ -771,9 +771,10 @@ write_to_file proc near
 	
 	loop_write:
 	mov index, bx
-	cmp [bx], 0
+	mov cx, [bx]
+	cmp cl, 0
 	je end_write
-	mov dx, [bx]
+	mov dl, cl
 	call setChar
 	mov bx, index
 	inc bx
