@@ -114,7 +114,7 @@
 			mov bx, handle_out
 			call fclose
 
-			mov ax, 3725
+			mov ax, 3605
 			call calcula_tempo
 			lea bx, tempo
 			call printf_s
