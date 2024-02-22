@@ -641,6 +641,13 @@ sprintf_w	endp
 calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
 	mov dx, 0
+
+	; Debug
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+
 	mov bx, ax ; copia ax para bx
 
 	mov cx, 60
