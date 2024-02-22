@@ -79,7 +79,6 @@
 
 		; Enquanto nao for EOF
 		main_loop:
-			inc num_linhas
 			; Testa fim do arquivo
 			call getChar
 			cmp ax, 0
@@ -91,6 +90,7 @@
 			call moveBack ; Retorna um caractere
 			
 			; Le linha
+			inc num_linhas
 			call read_line
 			mov linha_valida, 1
 			call parse_line
@@ -642,12 +642,6 @@ calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
 	mov dx, 0
 
-	; Debug
-	lea bx, aux_str
-	call sprintf_w
-	lea bx, aux_str
-	call printf_s
-
 	mov bx, ax ; copia ax para bx
 
 	mov cx, 60
@@ -706,6 +700,13 @@ calcula_tempo	proc 	near
 
 	escreve_segundo:
 	mov ax, segundos
+
+	; Debug
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+
 	mov index, bx
 	add bx, offset tempo
 	; Coloca 0 no começo, se necessario
