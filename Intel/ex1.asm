@@ -647,7 +647,17 @@ calcula_tempo	proc 	near
 	mov cx, 3600
 
 	div cx ; Divide Dx:Ax por 3600
-	mov horas, ax
+	mov horas, ax ; Ax tem o numero de horas
+	mov bx, dx ; Dx tem o resto da divisão
+
+	mov ax, bx
+	; Ax e Bx têm o número restante de segundos
+	mov dx, 0
+	mov cx, 60
+	div cx
+	mov minutos, ax
+	mov segundos, dx
+
 
 	; Debug
 	mov ax, horas
