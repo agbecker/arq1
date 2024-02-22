@@ -640,6 +640,7 @@ sprintf_w	endp
 ; Retorna string com o tempo a ser escrito em 'tempo'
 calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
+	mov dx, 0
 	mov bx, ax ; copia ax para bx
 
 	mov cx, 60
