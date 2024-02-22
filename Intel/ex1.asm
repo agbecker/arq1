@@ -22,7 +22,7 @@
 	aux_len			equ 10
 
 	; Variáveis
-	file_in		db	'a.in', 0
+	file_in		db	'in4.txt', 0
 	file_out	db  'a.out', 0
 	handle_in	dw 	0
 	handle_out	dw	0
@@ -117,11 +117,6 @@
 			cmp arquivo_valido, 1
 			jne end_main
 			call escreve_relatorio
-
-			
-
-			mov bx, handle_out
-			call fclose
 
 		end_main:
 
@@ -768,6 +763,9 @@ escreve_relatorio	proc	near
 	call write_to_file
 	lea bx, line_break
 	call write_to_file
+
+	mov bx, handle_out
+	call fclose
 
 	ret
 escreve_relatorio 	endp
