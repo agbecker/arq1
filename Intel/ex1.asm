@@ -38,7 +38,7 @@
 	arquivo_valido 	db 	1
 	linha_valida 	db 	1
 	aux_str		db	aux_len dup (0)
-	tempo		db	8 dup (0), CR, LF, 0
+	tempo		db	11 dup (0)
 	horas		dw	0
 	minutos		dw  0
 	segundos	dw	0
@@ -648,6 +648,14 @@ calcula_tempo	proc 	near
 	div cx
 	div cx
 	mov horas, ax
+
+	; Debug
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+
+
 	mul cx
 	mul cx
 	sub bx, ax
@@ -661,10 +669,6 @@ calcula_tempo	proc 	near
 
 	; Escreve a string
 	mov index, 0
-
-	; Debug
-	;jmp escreve_segundo
-
 	cmp horas, 0
 	je escreve_minuto
 	mov ax, horas
@@ -704,12 +708,6 @@ calcula_tempo	proc 	near
 
 	escreve_segundo:
 	mov ax, segundos
-
-	; Debug
-	;lea bx, aux_str
-	;call sprintf_w
-	;lea bx, aux_str
-	;call printf_s
 
 	mov bx, index
 	add bx, offset tempo
