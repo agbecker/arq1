@@ -679,8 +679,12 @@ calcula_tempo	proc 	near
 	inc index
 
 	escreve_minuto:
+	cmp horas, 0
+	jne escreve_min0
 	cmp minutos, 0
 	je escreve_segundo
+
+	escreve_min0:
 	mov ax, minutos
 	mov bx, index
 	add bx, offset tempo
