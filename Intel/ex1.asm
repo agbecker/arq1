@@ -46,6 +46,7 @@
 	horas		dw	0
 	minutos		dw  0
 	segundos	dw	0
+	param_flag	db	0
 
 	vmin		dw	0
 	vmax 		dw 	0
@@ -96,6 +97,8 @@
 		pop ds
 
 		call parse_cmd
+		cmp cmd_valido, 0
+		je end_main
 
 		; Inicializacoes
 		mov num_linhas, 0
@@ -833,7 +836,8 @@ parse_cmd endp
 ; Lê identificador -i, -o ou -v e passa para DL
 pega_identificador proc near
 	inc bx
-	mov dx, [bx]
+	mov ax, [bx]
+	mov param_flag, al
 	mov modo_parse, AGUARDA_PARAM
 
 	ret
@@ -845,6 +849,15 @@ le_parametro proc near
 	je modo_aguarda_param
 
 	modo_le_param:
+	cmp dl, '-'
+	je encerra_param
+	mov cx, bx
+	lea bx, string
+	add bx, index
+	mov [bx], dl
+	inc index
+	mov bx, cx
+	ret
 
 	modo_aguarda_param:
 	mov modo_parse, LENDO_PARAM
@@ -852,13 +865,33 @@ le_parametro proc near
 	je erro_param
 	cmp dl, 0
 	je erro_param
-	mov index, 0
+	mov index, 1
 	mov string, dl
 	ret
 
 	erro_param:
 	mov cmd_valido, 0
 	call informa_parametro_invalido
+	ret
+
+	encerra_param:
+	mov modo_parse, AGUARDA_HIFEN
+	
+	cmp param_flag, 'i'
+	jne encerra1
+	call set_input
+	jmp end_encerra
+
+	encerra1:
+	cmp param_flag, 'o'
+	jne encerra2
+	call set_output
+	jmp end_encerra
+
+	encerra2:
+	call set_voltage
+
+	end_encerra:
 	ret
 
 le_parametro endp
@@ -869,4 +902,16 @@ informa_parametro_invalido proc near
 
 informa_parametro_invalido endp
 
+set_input proc near
+	ret
+set_input endp
+
+
+set_output proc near
+	ret
+set_output endp
+
+set_voltage proc near
+	ret
+set_voltage endp
 		end
