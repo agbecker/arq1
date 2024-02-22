@@ -53,6 +53,7 @@
 	sw_n	dw	0 							; Usada dentro da funcao sprintf_w
 	sw_f	db	0							; Usada dentro da funcao sprintf_w
 	sw_m	dw	0							; Usada dentro da funcao sprintf_w
+	FileBuffer	db 	0
 	
 
 	; Mensagens
