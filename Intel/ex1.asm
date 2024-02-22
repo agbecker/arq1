@@ -59,6 +59,9 @@
 	msg_linha_1		db	'Linha ', 0
 	msg_linha_2		db	' invalida: ', 0
 	line_break		db 	CR, LF, 0
+	msg_tempo_total	db	'Tempo total de medicoes: ', 0
+	msg_tempo_regular	db	'Tempo de tensao adequada: ', 0
+	msg_tempo_baixo	db	'Tempo sem tensao: ', 0
 
 		.code
 		.startup
@@ -114,11 +117,17 @@
 			mov bx, handle_out
 			call fclose
 
+			cmp arquivo_valido, 1
+			jne end_main
+
 			mov ax, num_linhas
 			call calcula_tempo
+			lea bx, msg_tempo_total
+			call printf_s
 			lea bx, tempo
 			call printf_s
 
+		end_main:
 
 		.exit
 
