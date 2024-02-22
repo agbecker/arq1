@@ -670,57 +670,84 @@ calcula_tempo	proc 	near
 	sub bx, ax
 	mov segundos, bx
 
-	; Escreve a string
-	mov index, 0
-	cmp horas, 0
-	je escreve_minuto
+	; Debug
 	mov ax, horas
-	mov bx, index
-	add bx, offset tempo
-	; Coloca 0 no começo, se necessario
-	cmp horas, 10
-	jnb escreve_hora1
-	mov [bx], '0'
-	inc bx
-	escreve_hora1:
+	lea bx, aux_str
 	call sprintf_w
-	add index, 2
-	mov bx, index
-	add bx, offset tempo
-	mov [bx], ':'
-	inc index
+	lea bx, aux_str
+	call printf_s
+	lea bx, line_break
+	call printf_s
+
+	; Debug
+	mov ax, minutos
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+	lea bx, line_break
+	call printf_s
+
+	; Debug
+	mov ax, segundos
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+	lea bx, line_break
+	call printf_s
+
+	; Escreve a string
+	;mov index, 0
+	;cmp horas, 0
+	;je escreve_minuto
+	;mov ax, horas
+	;mov bx, index
+	;add bx, offset tempo
+	; Coloca 0 no começo, se necessario
+	;cmp horas, 10
+	;jnb escreve_hora1
+	;mov [bx], '0'
+	;inc bx
+	;escreve_hora1:
+	;call sprintf_w
+	;add index, 2
+	;mov bx, index
+	;add bx, offset tempo
+	;mov [bx], ':'
+	;inc index
 
 	escreve_minuto:
-	cmp minutos, 0
-	je escreve_segundo
-	mov ax, minutos
-	mov bx, index
-	add bx, offset tempo
+	;cmp minutos, 0
+	;je escreve_segundo
+	;mov ax, minutos
+	;mov bx, index
+	;add bx, offset tempo
 	; Coloca 0 no começo, se necessario
-	cmp minutos, 10
-	jnb escreve_min1
-	mov [bx], '0'
-	inc bx
-	escreve_min1:
-	call sprintf_w
-	add index, 2
-	mov bx, index
-	add bx, offset tempo
-	mov [bx], ':'
-	inc index
+	;cmp minutos, 10
+	;jnb escreve_min1
+	;mov [bx], '0'
+	;inc bx
+	;escreve_min1:
+	;call sprintf_w
+	;add index, 2
+	;mov bx, index
+	;add bx, offset tempo
+	;mov [bx], ':'
+	;inc index
 
 	escreve_segundo:
-	mov ax, segundos
+	;mov ax, segundos
 
-	mov bx, index
-	add bx, offset tempo
+	;mov bx, index
+	;add bx, offset tempo
 	; Coloca 0 no começo, se necessario
-	cmp segundos, 10
-	jnb escreve_seg1
-	mov [bx], '0'
-	inc bx
+	;cmp segundos, 10
+	;jnb escreve_seg1
+	;mov [bx], '0'
+	;inc bx
 	escreve_seg1:
-	call sprintf_w
+	;call sprintf_w
 	;add index, 2
 	;mov bx, index
 	;add bx, offset tempo
