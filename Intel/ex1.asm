@@ -118,33 +118,9 @@
 			
 			cmp arquivo_valido, 1
 			jne end_main
+			call escreve_relatorio
 
-			mov ax, num_linhas
-			call calcula_tempo
-			lea bx, msg_tempo_total
-			call write_to_file
-			lea bx, tempo
-			call write_to_file
-			lea bx, line_break
-			call write_to_file
-
-			mov ax, num_regular
-			call calcula_tempo
-			lea bx, msg_tempo_regular
-			call printf_s
-			lea bx, tempo
-			call printf_s
-			lea bx, line_break
-			call printf_s
-
-			mov ax, num_baixa
-			call calcula_tempo
-			lea bx, msg_tempo_baixo
-			call printf_s
-			lea bx, tempo
-			call printf_s
-			lea bx, line_break
-			call printf_s
+			
 
 			mov bx, handle_out
 			call fclose
@@ -783,5 +759,48 @@ write_to_file proc near
 	end_write:
 	ret
 write_to_file endp
+
+; Cria arquivo de saída e escreve relatório nele
+; Também escreve informações relevantes na tela
+escreve_relatorio	proc	near
+
+	mov ax, num_linhas
+	call calcula_tempo
+	lea bx, msg_tempo_total
+	call printf_s
+	lea bx, tempo
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	
+	mov ax, num_linhas
+	call calcula_tempo
+	lea bx, msg_tempo_total
+	call write_to_file
+	lea bx, tempo
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+
+	mov ax, num_regular
+	call calcula_tempo
+	lea bx, msg_tempo_regular
+	call write_to_file
+	lea bx, tempo
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+
+	mov ax, num_baixa
+	call calcula_tempo
+	lea bx, msg_tempo_baixo
+	call write_to_file
+	lea bx, tempo
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+
+	ret
+escreve_relatorio 	endp
 
 		end
