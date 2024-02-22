@@ -646,9 +646,9 @@ calcula_tempo	proc 	near
 	div cx
 	div cx
 	mov horas, ax
-	mul cx
-	mul cx
-	sub bx, ax
+	;mul cx
+	;mul cx
+	;sub bx, ax
 	;mov ax, bx
 	;div cx
 	;mov minutos, ax
