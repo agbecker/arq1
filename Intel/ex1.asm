@@ -642,20 +642,20 @@ calcula_tempo	proc 	near
 	; Calcula horas, minutos e segundos
 	mov dx, 0
 
+	; Debug
+	lea bx, aux_str
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+	lea bx, line_break
+	call printf_s
+
 	mov bx, ax ; copia ax para bx
 
 	mov cx, 60
 	div cx
 	div cx
 	mov horas, ax
-
-	; Debug
-	lea bx, aux_str
-	call sprintf_w
-	lea bx, aux_str
-	call printf_s
-
-
 	mul cx
 	mul cx
 	sub bx, ax
