@@ -96,14 +96,14 @@
 		pop es ; retorna as informações dos registradores de segmentos
 		pop ds
 
+		mov v_ref, 127
+
 		call parse_cmd
 		cmp cmd_valido, 0
 		je end_main
 
 		; Inicializacoes
 		mov num_linhas, 0
-		mov v_ref, 127
-
 		mov bx, v_ref
 		mov vmin, bx
 		sub vmin, delta_v
@@ -112,6 +112,8 @@
 
 		lea dx, file_in
 		call fopen
+		lea dx, file_out
+		call fcreate
 
 		; Enquanto nao for EOF
 		main_loop:
@@ -753,10 +755,6 @@ write_to_file endp
 ; Também escreve informações relevantes na tela
 escreve_relatorio	proc	near
 
-	; Cria arquivo
-	lea dx, file_out
-	call fcreate
-
 	; Imprime na tela
 	mov ax, num_linhas
 	call calcula_tempo
@@ -912,6 +910,15 @@ le_parametro proc near
 	call set_voltage
 
 	end_encerra:
+
+	; Debug
+	mov cx, bx
+	lea bx, string
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	mov bx, cx
+
 	ret
 
 le_parametro endp
@@ -961,6 +968,7 @@ set_input proc near
 
 	end_set_input:
 	mov [bx], 0
+	mov bx, cx
 
 	ret
 
@@ -990,6 +998,7 @@ set_output proc near
 
 	end_set_output:
 	mov [bx], 0
+	mov bx, cx
 	
 	ret
 set_output endp
