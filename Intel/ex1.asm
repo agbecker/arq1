@@ -909,7 +909,7 @@ le_parametro proc near
 	jmp end_encerra
 
 	encerra2:
-	;call set_voltage
+	call set_voltage
 
 	end_encerra:
 	ret
@@ -962,13 +962,6 @@ set_input proc near
 	end_set_input:
 	mov [bx], 0
 
-	; Debug
-	lea bx, file_in
-	call printf_s
-	lea bx, line_break
-	call printf_s
-	mov bx, cx
-
 	ret
 
 set_input endp
@@ -997,18 +990,48 @@ set_output proc near
 
 	end_set_output:
 	mov [bx], 0
-
-	; Debug
-	lea bx, file_out
-	call printf_s
-	lea bx, line_break
-	call printf_s
-	mov bx, cx
 	
 	ret
 set_output endp
 
 set_voltage proc near
+	mov cx, bx
+	lea bx, string
+	add bx, index
+	mov [bx], 0
+	mov index, 0
+	mov ax, 0
+
+	loop_set_volt:
+	lea bx, string
+	add bx, index
+	cmp [bx], 0
+	je break_set_volt
+	mov dx, 10
+	mul dl
+	mov ah, 0
+	mov dx, [bx]
+	sub dl, '0'
+	add al, dl
+	inc index
+	jmp loop_set_volt
+	
+	break_set_volt:
+	mov v_ref, ax
+
+
+
+	cmp v_ref, 127
+	je end_set_volt
+	cmp v_ref, 220
+	je end_set_volt
+	
+	mov cmd_valido, 0
+	lea bx, msg_v_invalido
+	call printf_s
+
+	end_set_volt:
+	mov bx, cx
 	ret
 set_voltage endp
 		end
