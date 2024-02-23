@@ -75,6 +75,10 @@
 	msg_falta_o		db	'Opcao [-o] sem parametro', 0
 	msg_falta_v		db	'Opcao [-v] sem parametro', 0
 	msg_v_invalido	db	'Parametro da opcao [-v] deve ser 127 ou 220', 0
+	str_parametros	db	'Parametros utilizados para o programa:', CR, LF, 0
+	str_i			db	'-> Arquivo de entrada: ', 0
+	str_o			db  '-> Arquivo de saida: ', 0
+	str_v			db 	'-> Tensao de referencia: ', 0
 
 		.code
 		.startup
@@ -149,6 +153,7 @@
 			
 			cmp arquivo_valido, 1
 			jne end_main
+
 			call escreve_relatorio
 
 		end_main:
@@ -756,6 +761,30 @@ write_to_file endp
 escreve_relatorio	proc	near
 
 	; Imprime na tela
+	lea bx, str_parametros
+	call printf_s
+	lea bx, str_i
+	call printf_s
+	lea bx, file_in
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	lea bx, str_o
+	call printf_s
+	lea bx, file_out
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	lea bx, str_v
+	call printf_s
+	lea bx, aux_str
+	mov ax, v_ref
+	call sprintf_w
+	lea bx, aux_str
+	call printf_s
+	lea bx, line_break
+	call printf_s
+
 	mov ax, num_linhas
 	call calcula_tempo
 	lea bx, msg_tempo_total
@@ -766,6 +795,32 @@ escreve_relatorio	proc	near
 	call printf_s
 	
 	; Escreve no arquivo
+	lea bx, str_parametros
+	call write_to_file
+	lea bx, str_i
+	call write_to_file
+	lea bx, file_in
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+	lea bx, str_o
+	call write_to_file
+	lea bx, file_out
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+	lea bx, str_v
+	call write_to_file
+	lea bx, aux_str
+	mov ax, v_ref
+	call sprintf_w
+	lea bx, aux_str
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+	lea bx, line_break
+	call write_to_file
+
 	mov ax, num_linhas
 	call calcula_tempo
 	lea bx, msg_tempo_total
@@ -910,15 +965,6 @@ le_parametro proc near
 	call set_voltage
 
 	end_encerra:
-
-	; Debug
-	mov cx, bx
-	lea bx, string
-	call printf_s
-	lea bx, line_break
-	call printf_s
-	mov bx, cx
-
 	ret
 
 le_parametro endp
