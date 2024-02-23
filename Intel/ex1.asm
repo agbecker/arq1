@@ -74,7 +74,7 @@
 	msg_falta_i		db	'Opcao [-i] sem parametro', 0
 	msg_falta_o		db	'Opcao [-o] sem parametro', 0
 	msg_falta_v		db	'Opcao [-v] sem parametro', 0
-	msg_v_invalido	db	'Parametro da opção [-v] deve ser 127 ou 220', 0
+	msg_v_invalido	db	'Parametro da opcao [-v] deve ser 127 ou 220', 0
 
 		.code
 		.startup
@@ -804,10 +804,14 @@ escreve_relatorio 	endp
 ; Interpreta instrucoes da linha de comando
 parse_cmd proc near
 	mov modo_parse, AGUARDA_HIFEN
+	lea bx, CMDLINE
 
 	loop_parse_cmd:
-		lea bx, CMDLINE
+		cmp cmd_valido, 1
+		je executa_parse_cmd
+		ret
 
+		executa_parse_cmd:
 		mov ax, [bx]
 
 		cmp al, 0
@@ -818,6 +822,7 @@ parse_cmd proc near
 
 		cmp modo_parse, AGUARDA_HIFEN
 		jne cmd1
+
 		call pega_identificador
 		jmp next_parse_cmd
 
@@ -829,44 +834,58 @@ parse_cmd proc near
 		jmp loop_parse_cmd
 
 		end_parse_cmd:
+		cmp modo_parse, AGUARDA_HIFEN
+		je end_pc1
+		call le_parametro
+
+		end_pc1:
 
 	ret
 parse_cmd endp
 
-; Lê identificador -i, -o ou -v e passa para DL
+; Lê identificador -i, -o ou -v e passa param_flag
 pega_identificador proc near
 	inc bx
 	mov ax, [bx]
 	mov param_flag, al
 	mov modo_parse, AGUARDA_PARAM
-
 	ret
 pega_identificador endp
 
 ; Le valor que segue -i, -o ou -v
 le_parametro proc near
+
 	cmp modo_parse, AGUARDA_PARAM
 	je modo_aguarda_param
 
 	modo_le_param:
-	cmp dl, '-'
+	cmp al, '-'
+	je encerra_param
+	cmp al, 0
 	je encerra_param
 	mov cx, bx
 	lea bx, string
 	add bx, index
-	mov [bx], dl
+	mov [bx], al
 	inc index
 	mov bx, cx
 	ret
 
 	modo_aguarda_param:
+	cmp al, SPACE
+	jne aguarda_par1
+	ret
+
+	aguarda_par1:
+
 	mov modo_parse, LENDO_PARAM
-	cmp dl, '-'
+
+	cmp al, '-' 
 	je erro_param
-	cmp dl, 0
+	cmp al, 0
 	je erro_param
 	mov index, 1
-	mov string, dl
+	mov string, al
 	ret
 
 	erro_param:
@@ -876,6 +895,7 @@ le_parametro proc near
 
 	encerra_param:
 	mov modo_parse, AGUARDA_HIFEN
+	dec bx
 	
 	cmp param_flag, 'i'
 	jne encerra1
@@ -889,7 +909,7 @@ le_parametro proc near
 	jmp end_encerra
 
 	encerra2:
-	call set_voltage
+	;call set_voltage
 
 	end_encerra:
 	ret
@@ -898,16 +918,93 @@ le_parametro endp
 
 informa_parametro_invalido proc near
 
+	cmp param_flag, 'i'
+	jne informa_pi1
+	lea bx, msg_falta_i
+	call printf_s
+	ret
+
+	informa_pi1:
+	cmp param_flag, 'o'
+	jne informa_pi2
+	lea bx, msg_falta_o
+	call printf_s
+	ret
+
+	informa_pi2:
+	lea bx, msg_falta_v
+	call printf_s
 	ret
 
 informa_parametro_invalido endp
 
 set_input proc near
+	mov cx, bx
+	lea bx, string
+	add bx, index
+	mov [bx], 0
+
+	mov index, 0
+
+	loop_set_input:
+	lea bx, string
+	add bx, index
+	mov ax, [bx]
+	cmp ax, 0
+	je end_set_input
+
+	lea bx, file_in
+	add bx, index
+	mov [bx], ax
+	inc index
+	jmp loop_set_input
+
+	end_set_input:
+	mov [bx], 0
+
+	; Debug
+	lea bx, file_in
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	mov bx, cx
+
 	ret
+
 set_input endp
 
 
 set_output proc near
+	mov cx, bx
+	lea bx, string
+	add bx, index
+	mov [bx], 0
+
+	mov index, 0
+
+	loop_set_output:
+	lea bx, string
+	add bx, index
+	mov ax, [bx]
+	cmp ax, 0
+	je end_set_output
+
+	lea bx, file_out
+	add bx, index
+	mov [bx], ax
+	inc index
+	jmp loop_set_output
+
+	end_set_output:
+	mov [bx], 0
+
+	; Debug
+	lea bx, file_out
+	call printf_s
+	lea bx, line_break
+	call printf_s
+	mov bx, cx
+	
 	ret
 set_output endp
 
